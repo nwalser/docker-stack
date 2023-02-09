@@ -14,6 +14,7 @@
 
 	let container: HTMLDivElement;
 	let editor: monaco.editor.IStandaloneCodeEditor;
+	let windowWidth: number;
 
 	onMount(async () => {
 		self.MonacoEnvironment = {
@@ -67,10 +68,18 @@
 		editor.onDidContentSizeChange(updateHeight);
 		updateHeight();
 
+ 		function onResize() {
+			editor.layout();
+ 		}
+ 		window.addEventListener('resize', onResize);
+
 		return () => {
 			editor.dispose();
+			window.removeEventListener('resize', onResize);
 		};
 	});
 </script>
+<svelte:window bind:innerWidth={windowWidth} />
+
 
 <div bind:this={container} class="h-full w-full" />
