@@ -9,10 +9,19 @@ export function stringifyDockerCompose(model: DockerCompose): string {
 function serializeDockerCompose(compose: DockerCompose) : Document{
     let document = new Document({
         version: compose.version,
-        services: serializeServices(compose.services),
-        volumes: serializeVolumes(compose.volumes),
-        networks: serializeNetworks(compose.networks)
     });
+
+    if(compose.services.some(() => true)){
+        document.add(document.createPair("services", serializeServices(compose.services)));
+    }
+
+    if(compose.volumes.some(() => true)){
+        document.add(document.createPair("volumes", serializeVolumes(compose.volumes)));
+    }
+
+    if(compose.networks.some(() => true)){
+        document.add(document.createPair("networks", serializeNetworks(compose.networks)));
+    }
 
     return document;
 }
@@ -71,11 +80,7 @@ function serializeNetwork(network: Network) : Document {
     });
 
     if(network.externalName !== ""){
-        var pair = document.createPair("external", { name: network.externalName });
-        
-        pair.value.commentBefore = "Hello There";
-
-        document.add(pair)
+        document.add(document.createPair("external", { name: network.externalName }))
     }
     
     if(network.labels.some(f => true)){
@@ -88,7 +93,6 @@ function serializeNetwork(network: Network) : Document {
 
     return document;
 }
-
 
 
 function serializeServices(services: Service[]){

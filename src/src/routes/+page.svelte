@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { DockerCompose, KeyValue, NetworkLink, Service, VolumeLink } from 'src/data/Model';
 	import { stringifyDockerCompose } from 'src/data/Serializer';
-	import { Alert, Accordion, AccordionItem } from 'flowbite-svelte';
 	import Editor from 'src/components/Editor.svelte';
 
 
@@ -56,6 +55,8 @@
             labels: [new KeyValue("hey", "world")]
         }
     ]
+
+
 
     let value = stringifyDockerCompose(compose);
 </script>
