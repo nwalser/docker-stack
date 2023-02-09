@@ -1,8 +1,8 @@
 <script lang="ts">
-	import Editor from 'src/components/Editor.svelte';
 	import { DockerCompose, KeyValue, NetworkLink, Service, VolumeLink } from 'src/data/Model';
 	import { stringifyDockerCompose } from 'src/data/Serializer';
 	import { Alert, Accordion, AccordionItem } from 'flowbite-svelte';
+	import Editor from 'src/components/Editor.svelte';
 
 
     let compose = new DockerCompose("3.1");
@@ -59,7 +59,5 @@
 
     let value = stringifyDockerCompose(compose);
 </script>
-
-Hello
 
 <Editor {value} language="yaml" />

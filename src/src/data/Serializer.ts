@@ -71,7 +71,11 @@ function serializeNetwork(network: Network) : Document {
     });
 
     if(network.externalName !== ""){
-        document.add(document.createPair("external", { name: network.externalName }))
+        var pair = document.createPair("external", { name: network.externalName });
+        
+        pair.value.commentBefore = "Hello There";
+
+        document.add(pair)
     }
     
     if(network.labels.some(f => true)){
@@ -101,9 +105,9 @@ function serializeService(service: Service) : Document {
     let document = new Document({
         image: service.image + ":" + service.tag,
         ports: serializeServicePorts(service.ports),
-        environment: serializeServiceEnvironment(service.environmentVariables),
         volumes: serializeServiceVolumes(service.volumeIds),
-        networks: serializeServiceNetworks(service.networkIds)
+        networks: serializeServiceNetworks(service.networkIds),        
+        environment: serializeKeyValuePairs(service.environmentVariables)
     });
 
     return document;
@@ -113,12 +117,6 @@ function serializeServiceNetworks(networkIds: NetworkLink[]) : Document {
     let document = new Document(networkIds.map(n => n.networkId));
 
     return document;}
-
-function serializeServiceEnvironment(environment: KeyValue[]) : Document {
-    let document = new Document(environment.map(e => e.key + ":" + e.value));
-
-    return document;
-}
 
 function serializeServiceVolumes(volumeIds: VolumeLink[]) : Document {
     let document = new Document(volumeIds.map(v => v.volumeId + ":" + v.mountPath));

@@ -4,8 +4,8 @@
 </script>
 
 <Navbar
-color="form"
-	navClass="px-2 sm:px-4 py-2.5 absolute w-full z-20 top-0 left-0 border-b"
+	color="form"
+	navClass="px-2 sm:px-4 py-2.5 w-full z-20 top-0 left-0 border-b"
 	let:hidden
 	let:toggle
 >
