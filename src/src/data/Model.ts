@@ -1,6 +1,8 @@
 export class DockerCompose {
     version: string;
     services: Service[] = [];
+    volumes: Volume[] = [];
+    networks: Network[] = [];
     comment: string = "";
 
     constructor(version: string){
@@ -9,22 +11,68 @@ export class DockerCompose {
 }
 
 export class Service {
-    name: string;
+    id: string;
     image: string;
     tag: string;
 
     ports: Port[] = [];    
-    environmentVariables: EnvironmentVariable[] = [];
-    volumes: IVolume[] = [];
+    environmentVariables: KeyValue[] = [];
+    volumeIds: VolumeLink[] = [];
+    networkIds: NetworkLink[] = [];
 
-    constructor(name: string, image: string, tag: string){
-        this.name = name;
+    constructor(id: string, image: string, tag: string){
+        this.id = id;
         this.image = image;
         this.tag = tag;
     }
 }
 
-export class EnvironmentVariable {
+export class VolumeLink {
+    volumeId: string;
+    mountPath: string;
+
+    constructor(volumeId: string, mountPath: string){
+        this.volumeId = volumeId;
+        this.mountPath = mountPath;
+    }
+}
+
+export class NetworkLink{
+    networkId: string;
+
+    constructor(networkId: string){
+        this.networkId = networkId;
+    }
+}
+
+export class Volume {
+    id: string;
+    name: string = "";
+    driver: string = "local";
+    externalName: string = "";
+    labels: KeyValue[] = [];
+
+    constructor(id: string){
+        this.id = id;
+    }
+}
+
+export class Network {
+    id: string;
+    name: string = "";
+    externalName: string = "";
+
+    driver: string = "bridge";
+    driverOptions: KeyValue[] = [];
+
+    labels: KeyValue[] = [];
+
+    constructor(id: string){
+        this.id = id;
+    }
+}
+
+export class KeyValue {
     key: string;
     value: string;
 
@@ -43,21 +91,5 @@ export class Port {
         this.container = container;
     }
 }
-
-interface IVolume {
-
-}
-
-export class DefaultVolume implements IVolume {
-    source: string;
-    target: string;
-
-    constructor(source: string, target: string){
-        this.source = source;
-        this.target = target;
-    }
-}
-
-
 
 export {}
