@@ -1,0 +1,483 @@
+[
+    {
+        "name": "Simple MongoDB",
+        "description": "Simple MongoDB instance with public facing port.",
+        "compose": {
+            "version": "3.1",
+            "services": [
+                {
+                    "id": "mongo",
+                    "image": "mongo",
+                    "tag": "4.2",
+                    "networkIds": [
+                        {
+                            "networkId": "network1"
+                        }
+                    ],
+                    "ports": [
+                        {
+                            "container": 1999,
+                            "host": 4000
+                        }
+                    ],
+                    "volumeIds": [
+                        {
+                            "volumeId": "volume1",
+                            "mountPath": "/mnt/data"
+                        }
+                    ],
+                    "environmentVariables": [
+                        {
+                            "key": "AGE",
+                            "value": "18"
+                        }
+                    ]
+                },
+                {
+                    "id": "minio",
+                    "image": "minio",
+                    "tag": "12.0",
+                    "ports": [],
+                    "environmentVariables": [],
+                    "volumeIds": [],
+                    "networkIds": []
+                }
+            ],
+            "volumes": [
+                {
+                    "id": "volume1",
+                    "name": "myVolumeName",
+                    "driver": "default",
+                    "externalName": "somename",
+                    "labels": [
+                        {
+                            "key": "hey",
+                            "value": "world"
+                        }
+                    ]
+                }
+            ],
+            "networks": [
+                {
+                    "id": "network1",
+                    "name": "myCustomName",
+                    "driver": "bridge",
+                    "externalName": "someexternalNetwork",
+                    "labels": [
+                        {
+                            "key": "Hello",
+                            "value": "World"
+                        }
+                    ],
+                    "driverOptions": [
+                        {
+                            "key": "Some",
+                            "value": "Options"
+                        }
+                    ]
+                }
+            ],
+            "comment": ""
+        }
+    },    {
+        "name": "Simple MongoDB",
+        "description": "Simple MongoDB instance with public facing port.",
+        "compose": {
+            "version": "3.1",
+            "services": [
+                {
+                    "id": "mongo",
+                    "image": "mongo",
+                    "tag": "4.2",
+                    "networkIds": [
+                        {
+                            "networkId": "network1"
+                        }
+                    ],
+                    "ports": [
+                        {
+                            "container": 1999,
+                            "host": 4000
+                        }
+                    ],
+                    "volumeIds": [
+                        {
+                            "volumeId": "volume1",
+                            "mountPath": "/mnt/data"
+                        }
+                    ],
+                    "environmentVariables": [
+                        {
+                            "key": "AGE",
+                            "value": "18"
+                        }
+                    ]
+                },
+                {
+                    "id": "minio",
+                    "image": "minio",
+                    "tag": "12.0",
+                    "ports": [],
+                    "environmentVariables": [],
+                    "volumeIds": [],
+                    "networkIds": []
+                }
+            ],
+            "volumes": [
+                {
+                    "id": "volume1",
+                    "name": "myVolumeName",
+                    "driver": "default",
+                    "externalName": "somename",
+                    "labels": [
+                        {
+                            "key": "hey",
+                            "value": "world"
+                        }
+                    ]
+                }
+            ],
+            "networks": [
+                {
+                    "id": "network1",
+                    "name": "myCustomName",
+                    "driver": "bridge",
+                    "externalName": "someexternalNetwork",
+                    "labels": [
+                        {
+                            "key": "Hello",
+                            "value": "World"
+                        }
+                    ],
+                    "driverOptions": [
+                        {
+                            "key": "Some",
+                            "value": "Options"
+                        }
+                    ]
+                }
+            ],
+            "comment": ""
+        }
+    },    {
+        "name": "Simple MongoDB",
+        "description": "Simple MongoDB instance with public facing port.",
+        "compose": {
+            "version": "3.1",
+            "services": [
+                {
+                    "id": "mongo",
+                    "image": "mongo",
+                    "tag": "4.2",
+                    "networkIds": [
+                        {
+                            "networkId": "network1"
+                        }
+                    ],
+                    "ports": [
+                        {
+                            "container": 1999,
+                            "host": 4000
+                        }
+                    ],
+                    "volumeIds": [
+                        {
+                            "volumeId": "volume1",
+                            "mountPath": "/mnt/data"
+                        }
+                    ],
+                    "environmentVariables": [
+                        {
+                            "key": "AGE",
+                            "value": "18"
+                        }
+                    ]
+                },
+                {
+                    "id": "minio",
+                    "image": "minio",
+                    "tag": "12.0",
+                    "ports": [],
+                    "environmentVariables": [],
+                    "volumeIds": [],
+                    "networkIds": []
+                }
+            ],
+            "volumes": [
+                {
+                    "id": "volume1",
+                    "name": "myVolumeName",
+                    "driver": "default",
+                    "externalName": "somename",
+                    "labels": [
+                        {
+                            "key": "hey",
+                            "value": "world"
+                        }
+                    ]
+                }
+            ],
+            "networks": [
+                {
+                    "id": "network1",
+                    "name": "myCustomName",
+                    "driver": "bridge",
+                    "externalName": "someexternalNetwork",
+                    "labels": [
+                        {
+                            "key": "Hello",
+                            "value": "World"
+                        }
+                    ],
+                    "driverOptions": [
+                        {
+                            "key": "Some",
+                            "value": "Options"
+                        }
+                    ]
+                }
+            ],
+            "comment": ""
+        }
+    },    {
+        "name": "Simple MongoDB",
+        "description": "Simple MongoDB instance with public facing port.",
+        "compose": {
+            "version": "3.1",
+            "services": [
+                {
+                    "id": "mongo",
+                    "image": "mongo",
+                    "tag": "4.2",
+                    "networkIds": [
+                        {
+                            "networkId": "network1"
+                        }
+                    ],
+                    "ports": [
+                        {
+                            "container": 1999,
+                            "host": 4000
+                        }
+                    ],
+                    "volumeIds": [
+                        {
+                            "volumeId": "volume1",
+                            "mountPath": "/mnt/data"
+                        }
+                    ],
+                    "environmentVariables": [
+                        {
+                            "key": "AGE",
+                            "value": "18"
+                        }
+                    ]
+                },
+                {
+                    "id": "minio",
+                    "image": "minio",
+                    "tag": "12.0",
+                    "ports": [],
+                    "environmentVariables": [],
+                    "volumeIds": [],
+                    "networkIds": []
+                }
+            ],
+            "volumes": [
+                {
+                    "id": "volume1",
+                    "name": "myVolumeName",
+                    "driver": "default",
+                    "externalName": "somename",
+                    "labels": [
+                        {
+                            "key": "hey",
+                            "value": "world"
+                        }
+                    ]
+                }
+            ],
+            "networks": [
+                {
+                    "id": "network1",
+                    "name": "myCustomName",
+                    "driver": "bridge",
+                    "externalName": "someexternalNetwork",
+                    "labels": [
+                        {
+                            "key": "Hello",
+                            "value": "World"
+                        }
+                    ],
+                    "driverOptions": [
+                        {
+                            "key": "Some",
+                            "value": "Options"
+                        }
+                    ]
+                }
+            ],
+            "comment": ""
+        }
+    },    {
+        "name": "Simple MongoDB",
+        "description": "Simple MongoDB instance with public facing port.",
+        "compose": {
+            "version": "3.1",
+            "services": [
+                {
+                    "id": "mongo",
+                    "image": "mongo",
+                    "tag": "4.2",
+                    "networkIds": [
+                        {
+                            "networkId": "network1"
+                        }
+                    ],
+                    "ports": [
+                        {
+                            "container": 1999,
+                            "host": 4000
+                        }
+                    ],
+                    "volumeIds": [
+                        {
+                            "volumeId": "volume1",
+                            "mountPath": "/mnt/data"
+                        }
+                    ],
+                    "environmentVariables": [
+                        {
+                            "key": "AGE",
+                            "value": "18"
+                        }
+                    ]
+                },
+                {
+                    "id": "minio",
+                    "image": "minio",
+                    "tag": "12.0",
+                    "ports": [],
+                    "environmentVariables": [],
+                    "volumeIds": [],
+                    "networkIds": []
+                }
+            ],
+            "volumes": [
+                {
+                    "id": "volume1",
+                    "name": "myVolumeName",
+                    "driver": "default",
+                    "externalName": "somename",
+                    "labels": [
+                        {
+                            "key": "hey",
+                            "value": "world"
+                        }
+                    ]
+                }
+            ],
+            "networks": [
+                {
+                    "id": "network1",
+                    "name": "myCustomName",
+                    "driver": "bridge",
+                    "externalName": "someexternalNetwork",
+                    "labels": [
+                        {
+                            "key": "Hello",
+                            "value": "World"
+                        }
+                    ],
+                    "driverOptions": [
+                        {
+                            "key": "Some",
+                            "value": "Options"
+                        }
+                    ]
+                }
+            ],
+            "comment": ""
+        }
+    },    {
+        "name": "Simple MongoDB",
+        "description": "Simple MongoDB instance with public facing port.",
+        "compose": {
+            "version": "3.1",
+            "services": [
+                {
+                    "id": "mongo",
+                    "image": "mongo",
+                    "tag": "4.2",
+                    "networkIds": [
+                        {
+                            "networkId": "network1"
+                        }
+                    ],
+                    "ports": [
+                        {
+                            "container": 1999,
+                            "host": 4000
+                        }
+                    ],
+                    "volumeIds": [
+                        {
+                            "volumeId": "volume1",
+                            "mountPath": "/mnt/data"
+                        }
+                    ],
+                    "environmentVariables": [
+                        {
+                            "key": "AGE",
+                            "value": "18"
+                        }
+                    ]
+                },
+                {
+                    "id": "minio",
+                    "image": "minio",
+                    "tag": "12.0",
+                    "ports": [],
+                    "environmentVariables": [],
+                    "volumeIds": [],
+                    "networkIds": []
+                }
+            ],
+            "volumes": [
+                {
+                    "id": "volume1",
+                    "name": "myVolumeName",
+                    "driver": "default",
+                    "externalName": "somename",
+                    "labels": [
+                        {
+                            "key": "hey",
+                            "value": "world"
+                        }
+                    ]
+                }
+            ],
+            "networks": [
+                {
+                    "id": "network1",
+                    "name": "myCustomName",
+                    "driver": "bridge",
+                    "externalName": "someexternalNetwork",
+                    "labels": [
+                        {
+                            "key": "Hello",
+                            "value": "World"
+                        }
+                    ],
+                    "driverOptions": [
+                        {
+                            "key": "Some",
+                            "value": "Options"
+                        }
+                    ]
+                }
+            ],
+            "comment": ""
+        }
+    }
+]
