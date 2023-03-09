@@ -1,6 +1,4 @@
 <script lang="ts">
-	import Editor from 'src/components/Editor.svelte';
-	import { stringifyDockerCompose } from './Serializer';
 	import type { Stack } from './StackModel';
 
 	export let stack: Stack;
