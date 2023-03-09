@@ -1,49 +1,51 @@
 <script lang="ts">
 	import Tag from './Tag.svelte';
 	import { page } from '$app/stores';
-	import Editor from 'src/components/Editor.svelte';
-	import { stringifyDockerCompose } from 'src/data/Serializer';
-	import { templatesStore } from 'src/routes/templates/[name]/TemplateStore';
 	import Empty from './Empty.svelte';
-	import { Image, PossiblePort, PossibleVariable, PossibleVolume } from './ImageModel';
-	import { imagesStore } from './ImageStore';
 	import Port from './Port.svelte';
 	import Variable from './Variable.svelte';
 	import Volume from './Volume.svelte';
 	import { error } from '@sveltejs/kit';
-	import TemplatePreview from 'src/routes/templates/[name]/TemplatePreview.svelte';
+	import { imagesStore } from '../../ImageStore';
+	import StackPreview from 'src/routes/stacks/StackPreview.svelte';
+	import { stackStore } from 'src/routes/stacks/StackStore';
+	import Pull from './Pull.svelte';
 
-	let name = $page.params.name;
+	let imageName = $page.params.name;
 	let tag = $page.params.tag;
 
-	let image = $imagesStore.find((t) => t.name == name && t.tags.some((t) => t == tag))!;
+	let image = $imagesStore.find((t) => t.name == imageName && t.tag == tag)!;
+	let tags = $imagesStore.filter((t) => t.name == imageName)!.map((i) => i.tag);
 	if (!image) throw error(404, 'Not found');
-
-	let templates = $templatesStore.filter((t) => t.name == $page.params.name);
+	let stacks = $stackStore.filter((t) => t.compose.services.some((s) => s.image == imageName));
 </script>
 
+<h1 class="text-4xl font-bold dark:text-white mt-4">{imageName}:{tag} image reference</h1>
 
 <div class="grid grid-cols-4 gap-8 pt-4">
 	<div class="col-span-3">
-        <h1 class="text-4xl font-bold dark:text-white mt-4">{name}:{tag} image reference</h1>
-        <p class="text-lg font-normal dark:text-gray-300 text-justify">{image?.description}</p>
+		<p class="text-lg font-normal dark:text-gray-300 text-justify">{image?.description}</p>
 
-        <h3 class="text-2xl font-bold dark:text-white mt-4">Templates</h3>
-        <div class="col-span-1 grid grid-cols-2 gap-2">
-            {#each templates as templates}
-                <TemplatePreview template={templates} />
-            {:else}
-                <Empty />
-            {/each}
-        </div>
+		<div class="col-span-1 grid grid-cols-4 gap-2">
+			<h3 class="text-2xl font-bold dark:text-white mt-4 col-span-4">Templates</h3>
+			{#each stacks as stack}
+				<StackPreview {stack} />
+			{:else}
+				<Empty />
+			{/each}
+		</div>
 	</div>
 
 	<div class="col-span-1">
 		<div class="col-span-1 grid grid-cols-1 gap-2">
-			<h3 class="text-2xl font-bold dark:text-white mt-4">Other Versions</h3>
+			<Pull image={image.name} {tag} />
+		</div>
+
+		<div class="col-span-1 grid grid-cols-1 gap-2">
+			<h3 class="text-2xl font-bold dark:text-white mt-4">Versions</h3>
 			<div class="flex flex-wrap">
-				{#each image.tags as tag}
-					<Tag tag={tag} />
+				{#each tags as tag}
+					<Tag {tag} />
 				{:else}
 					<Empty />
 				{/each}

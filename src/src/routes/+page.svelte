@@ -1,64 +1,41 @@
 <script lang="ts">
-	import { DockerCompose, KeyValue, NetworkLink, Service, VolumeLink } from 'src/data/Model';
-	import { stringifyDockerCompose } from 'src/data/Serializer';
-	import Editor from 'src/components/Editor.svelte';
-
-
-    let compose = new DockerCompose("3.1");
-
-    compose.services = [
-        {
-            id:"mongo",
-            image:"mongo",
-            tag:"4.2",
-            networkIds: [
-                new NetworkLink("network1")
-            ],
-            ports: [
-                {
-                    container: 1999,
-                    host: 4000
-                }
-            ],
-            volumeIds: [
-                new VolumeLink("volume1", "/mnt/data")
-            ],
-            environmentVariables: [
-                {
-                    key: "AGE",
-                    value: "18"
-                }
-            ]
-        },
-        new Service("minio", "minio", "12.0"),
-    ];
-
-    compose.networks = [
-        {
-            id: "network1",
-            name: "myCustomName",
-
-            driver: "bridge",
-            externalName: "someexternalNetwork",
-            labels: [new KeyValue("Hello", "World")],
-            driverOptions: [new KeyValue("Some", "Options")]
-        }
-    ]
-
-    compose.volumes = [
-        {
-            id: "volume1",
-            name: "myVolumeName",
-
-            driver: "default",
-            externalName: "somename",
-            labels: [new KeyValue("hey", "world")]
-        }
-    ]
-
-
-
-    let value = stringifyDockerCompose(compose);
+	import ImagePreview from './images/ImagePreview.svelte';
+	import { imagesStore } from './images/ImageStore';
+	import StackPreview from './stacks/StackPreview.svelte';
+	import { stackStore } from './stacks/StackStore';
 </script>
 
-<Editor {value} language="yaml" />
+<h3 class="text-2xl font-bold dark:text-white mt-4">Stacks</h3>
+<div class="grid grid-cols-4 gap-4 pt-4">
+	{#each $stackStore.slice(0, 7) as stack}
+		<StackPreview {stack} />
+	{/each}
+	{#if $stackStore.length > 7}
+		<a
+			href="/stacks/"
+			class="max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 flex align-middle justify-center"
+		>
+			<h5 class="mb-0 text-xl font-light tracking-tight text-gray-900 dark:text-white">
+				View all Stacks
+			</h5>
+		</a>
+	{/if}
+</div>
+
+<h3 class="text-2xl font-bold dark:text-white mt-4">Images</h3>
+<div class="grid grid-cols-4 gap-4 pt-4">
+	{#each $imagesStore.slice(0, 7) as image}
+		<ImagePreview {image} />
+	{/each}
+
+	{#if $imagesStore.length > 7}
+		<a
+			href="/images/"
+			class="max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 flex align-middle justify-center"
+		>
+			<h5 class="mb-0 text-xl font-light tracking-tight text-gray-900 dark:text-white">
+				View all Images
+			</h5>
+		</a>
+	{/if}
+</div>
