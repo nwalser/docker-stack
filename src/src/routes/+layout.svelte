@@ -67,4 +67,6 @@
 	</NavUl>
 </Navbar>
 
-<slot />
+<div class="mx-auto container p-4">
+	<slot />
+</div>
