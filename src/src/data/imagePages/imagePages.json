@@ -1,6 +1,8 @@
 [
     {
         "name": "mongo",
+        "readableName": "MongoDB",
+        "imageUrl": "https://www.nathaniel-walser.com/docker-compose-templates/mongo/header.svg",
         "tags": [
             "6"
         ],
