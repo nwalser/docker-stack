@@ -11,8 +11,8 @@
 	let tooltipContent = 'Copy';
 
 	function copied() {
-		tooltipContent = copyCount > 1 ? 'Copied! ' + copyCount + " times" : 'Copied!';
 		copyCount++;
+		tooltipContent = copyCount > 1 ? 'Copied! ' + copyCount + " times" : 'Copied!';
 	}
 </script>
 

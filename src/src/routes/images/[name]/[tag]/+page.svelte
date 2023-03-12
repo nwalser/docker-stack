@@ -5,7 +5,7 @@
 	import Variable from './Variable.svelte';
 	import Volume from './Volume.svelte';
 	import { error } from '@sveltejs/kit';
-	import { getAllTags, getImage } from '../../../../data/images/ImageData';
+	import { getImage } from '../../../../data/images/ImageData';
 	import { getStackPage, getStackPagesUsingImage } from 'src/data/stackPages/StackData';
 	import { getImagePage } from 'src/data/imagePages/ImagePageData';
 	import LargeStackPreview from 'src/routes/stacks/LargeStackPreview.svelte';
