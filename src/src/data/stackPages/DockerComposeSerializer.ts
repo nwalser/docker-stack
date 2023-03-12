@@ -6,30 +6,28 @@ export function stringifyDockerCompose(model: DockerCompose): string {
 }
 
 
-function serializeDockerCompose(compose: DockerCompose) : Document{
+function serializeDockerCompose(compose: DockerCompose): Document {
     let document = new Document({
         version: compose.version,
     });
 
-    console.log(compose);
-
-    if(compose.services?.length > 0){
+    if (compose.services?.length > 0) {
         document.add(document.createPair("services", serializeServices(compose.services)));
     }
 
-    if(compose.volumes?.length > 0){
+    if (compose.volumes?.length > 0) {
         document.add(document.createPair("volumes", serializeVolumes(compose.volumes)));
     }
 
-    if(compose.networks?.length > 0){
+    if (compose.networks?.length > 0) {
         document.add(document.createPair("networks", serializeNetworks(compose.networks)));
     }
 
     return document;
 }
 
-function serializeVolumes(volumes: Volume[]) : Document {
-    var indexedArray: {[key: string]: Document} = {}
+function serializeVolumes(volumes: Volume[]): Document {
+    var indexedArray: { [key: string]: Document } = {}
 
     volumes.forEach((v) => indexedArray[v.id] = serializeVolume(v))
 
@@ -44,18 +42,18 @@ function serializeVolume(volume: Volume): Document {
         driver: volume.driver,
     });
 
-    if(volume.externalName !== ""){
+    if (volume.externalName !== undefined) {
         document.add(document.createPair("external", { name: volume.externalName }))
     }
-    
-    if(volume.labels?.length > 0){
+
+    if (volume.labels?.length > 0) {
         document.add(document.createPair("labels", serializeKeyValuePairs(volume.labels)))
     }
 
     return document;
 }
 
-function serializeKeyValuePairs(pairs: KeyValue[]) : Document {
+function serializeKeyValuePairs(pairs: KeyValue[]): Document {
     let document = new Document({});
 
     pairs.forEach(p => {
@@ -65,8 +63,8 @@ function serializeKeyValuePairs(pairs: KeyValue[]) : Document {
     return document;
 }
 
-function serializeNetworks(networks: Network[]) : Document {
-    var indexedArray: {[key: string]: Document} = {}
+function serializeNetworks(networks: Network[]): Document {
+    var indexedArray: { [key: string]: Document } = {}
 
     networks.forEach((n) => indexedArray[n.id] = serializeNetwork(n))
 
@@ -75,21 +73,21 @@ function serializeNetworks(networks: Network[]) : Document {
     return document;
 }
 
-function serializeNetwork(network: Network) : Document {
+function serializeNetwork(network: Network): Document {
     let document = new Document({
         name: network.name,
         driver: network.driver,
     });
 
-    if(network.externalName !== ""){
+    if (network.externalName !== undefined) {
         document.add(document.createPair("external", { name: network.externalName }))
     }
-    
-    if(network.labels?.length > 0){
+
+    if (network.labels?.length > 0) {
         document.add(document.createPair("labels", serializeKeyValuePairs(network.labels)))
     }
 
-    if(network.driverOptions.some(f => true)){
+    if (network.driverOptions.some(f => true)) {
         document.add(document.createPair("driver_opts", serializeKeyValuePairs(network.driverOptions)))
     }
 
@@ -97,8 +95,8 @@ function serializeNetwork(network: Network) : Document {
 }
 
 
-function serializeServices(services: Service[]){
-    var indexedArray: {[key: string]: Document} = {}
+function serializeServices(services: Service[]) {
+    var indexedArray: { [key: string]: Document } = {}
 
     services.forEach((s) => indexedArray[s.id] = serializeService(s))
 
@@ -107,31 +105,44 @@ function serializeServices(services: Service[]){
     return document;
 }
 
-function serializeService(service: Service) : Document {
+function serializeService(service: Service): Document {
     let document = new Document({
         image: service.image + ":" + service.tag,
-        ports: serializeServicePorts(service.ports),
-        volumes: serializeServiceVolumes(service.volumeIds),
-        networks: serializeServiceNetworks(service.networkIds),        
-        environment: serializeKeyValuePairs(service.environmentVariables)
     });
 
+    if (service.ports?.length > 0) {
+        document.addIn(["ports"], serializeServicePorts(service.ports));
+    }
+
+    if (service.networkIds?.length > 0) {
+        document.addIn(["networks"], serializeServiceNetworks(service.networkIds));
+    }
+
+    if (service.volumeIds?.length > 0) {
+        document.addIn(["volumes"], serializeServiceVolumes(service.volumeIds));
+    }
+
+    if (service.environmentVariables?.length > 0) {
+        document.addIn(["environment"], serializeKeyValuePairs(service.environmentVariables));
+    }
+
     return document;
 }
 
-function serializeServiceNetworks(networkIds: NetworkLink[]) : Document {
-    let document = new Document(networkIds.map(n => n.networkId));
-
-    return document;}
-
-function serializeServiceVolumes(volumeIds: VolumeLink[]) : Document {
-    let document = new Document(volumeIds.map(v => v.volumeId + ":" + v.mountPath));
+function serializeServiceNetworks(networkIds: NetworkLink[]): Document {
+    let document = new Document(networkIds?.map(n => n.networkId));
 
     return document;
 }
 
-function serializeServicePorts(ports: Port[]) : Document {
-    let document = new Document(ports.map(e => e.host + ":" + e.container));
+function serializeServiceVolumes(volumeIds: VolumeLink[]): Document {
+    let document = new Document(volumeIds?.map(v => v.volumeId + ":" + v.mountPath));
+
+    return document;
+}
+
+function serializeServicePorts(ports: Port[]): Document {
+    let document = new Document(ports?.map(e => e.host + ":" + e.container));
 
     return document;
 }

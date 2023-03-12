@@ -8,12 +8,8 @@
 
 	let stackId = $page.params.id;
 
-
 	let stack = getStackPage(stackId)!;
 	if (!stack) throw error(404, 'Not found');
 </script>
 
-<Card href="/cards" padding="none">
-    <Editor value={stringifyDockerCompose(stack.compose)} language="yaml" />
-</Card>
-
+<Editor value={stringifyDockerCompose(stack.compose)} language="yaml" />

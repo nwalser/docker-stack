@@ -57,87 +57,71 @@
             ],
             "comment": ""
         }
-    },    
+    },
     {
-        "id": "1",
-        "name": "MongoDB Minio Stack",
-        "description": "Simple MongoDB instance with public facing port.",
+        "id": "simple-mongo-with-express",
+        "name": "Simple MongoDB + Express Stack",
+        "description": "Simple MongoDB instance with public facing port and a MongoDB Express Management interface.",
         "compose": {
             "version": "3.1",
             "services": [
                 {
                     "id": "mongo",
                     "image": "mongo",
-                    "tag": "4.2",
-                    "networkIds": [
-                        {
-                            "networkId": "network1"
-                        }
-                    ],
+                    "tag": "6",
                     "ports": [
                         {
-                            "container": 1999,
-                            "host": 4000
+                            "container": 27017,
+                            "host": 27017
                         }
                     ],
                     "volumeIds": [
                         {
-                            "volumeId": "volume1",
-                            "mountPath": "/mnt/data"
+                            "volumeId": "mongo-data",
+                            "mountPath": "/data/db"
+                        },
+                        {
+                            "volumeId": "mongo-config",
+                            "mountPath": "/data/configdb"
                         }
                     ],
                     "environmentVariables": [
                         {
-                            "key": "AGE",
-                            "value": "18"
+                            "key": "MONGO_INITDB_ROOT_USERNAME",
+                            "value": "root"
+                        },
+                        {
+                            "key": "MONGO_INITDB_ROOT_PASSWORD",
+                            "value": "root"
                         }
                     ]
                 },
                 {
-                    "id": "minio",
-                    "image": "minio",
-                    "tag": "12.0",
-                    "ports": [],
-                    "environmentVariables": [],
-                    "volumeIds": [],
-                    "networkIds": []
+                    "id": "mongo-express",
+                    "image": "mongo-express",
+                    "tag": "latest",
+                    "ports": [
+                        {
+                            "container": 8081,
+                            "host": 8081
+                        }
+                    ],
+                    "environmentVariables": [
+                        {
+                            "key": "ME_CONFIG_MONGODB_URL",
+                            "value": "mongodb://mongo:27017/"
+                        }
+                    ]
                 }
             ],
             "volumes": [
                 {
-                    "id": "volume1",
-                    "name": "myVolumeName",
-                    "driver": "default",
-                    "externalName": "somename",
-                    "labels": [
-                        {
-                            "key": "hey",
-                            "value": "world"
-                        }
-                    ]
-                }
-            ],
-            "networks": [
+                    "id": "mongo-data"
+                },
                 {
-                    "id": "network1",
-                    "name": "myCustomName",
-                    "driver": "bridge",
-                    "externalName": "someexternalNetwork",
-                    "labels": [
-                        {
-                            "key": "Hello",
-                            "value": "World"
-                        }
-                    ],
-                    "driverOptions": [
-                        {
-                            "key": "Some",
-                            "value": "Options"
-                        }
-                    ]
+                    "id": "mongo-config"
                 }
-            ],
-            "comment": ""
+            ]
         }
     }
 ]
