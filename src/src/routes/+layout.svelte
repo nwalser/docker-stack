@@ -1,6 +1,18 @@
-<script>
+<script lang="ts">
 	import '../app.css';
 	import { Navbar, NavBrand, NavLi, NavUl, NavHamburger, Button, Input } from 'flowbite-svelte';
+	import { goto } from '$app/navigation';
+	import { SearchStore } from 'src/data/search/Search';
+
+	let search = '';
+
+	function navigate(){
+		goto('/search', { keepFocus: true, replaceState: false });
+	}
+
+	$: {
+		$SearchStore = search;
+	}
 </script>
 
 <Navbar
@@ -56,12 +68,12 @@
 					/></svg
 				>
 			</div>
-			<Input id="search-navbar" class="pl-10" placeholder="Search..." />
+			<Input id="search-navbar" class="pl-10" placeholder="Search..." bind:value={search} on:click={navigate} />
 		</div>
 		<NavHamburger on:click={toggle} />
 	</div>
 	<NavUl {hidden}>
-		<NavLi href="/images" active={true}>Images</NavLi>
+		<NavLi href="/images">Images</NavLi>
 		<NavLi href="/stacks">Stacks</NavLi>
 	</NavUl>
 </Navbar>

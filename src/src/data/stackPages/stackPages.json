@@ -45,14 +45,10 @@
             ],
             "volumes": [
                 {
-                    "id": "mongo-data",
-                    "name": "mongo-data",
-                    "driver": "default"
+                    "id": "mongo-data"
                 },
                 {
-                    "id": "mongo-config",
-                    "name": "mongo-config",
-                    "driver": "default"
+                    "id": "mongo-config"
                 }
             ],
             "comment": ""
