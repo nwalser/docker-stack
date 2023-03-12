@@ -1,7 +1,7 @@
 <script lang="ts">
-	import type { Image } from "./ImageModel";
+	import type { ImagePage } from "../../data/imagePages/ImagePageModel";
 
-    export let image: Image
+    export let image: ImagePage
 </script>
 
 <a

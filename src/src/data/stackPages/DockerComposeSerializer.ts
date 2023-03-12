@@ -1,4 +1,4 @@
-import type { DockerCompose, KeyValue, Network, NetworkLink, Port, Service, Volume, VolumeLink } from "./Model";
+import type { DockerCompose, KeyValue, Network, NetworkLink, Port, Service, Volume, VolumeLink } from "./DockerComposeModel";
 import { Document } from 'yaml';
 
 export function stringifyDockerCompose(model: DockerCompose): string {
@@ -11,15 +11,17 @@ function serializeDockerCompose(compose: DockerCompose) : Document{
         version: compose.version,
     });
 
-    if(compose.services.some(() => true)){
+    console.log(compose);
+
+    if(compose.services?.length > 0){
         document.add(document.createPair("services", serializeServices(compose.services)));
     }
 
-    if(compose.volumes.some(() => true)){
+    if(compose.volumes?.length > 0){
         document.add(document.createPair("volumes", serializeVolumes(compose.volumes)));
     }
 
-    if(compose.networks.some(() => true)){
+    if(compose.networks?.length > 0){
         document.add(document.createPair("networks", serializeNetworks(compose.networks)));
     }
 
@@ -46,7 +48,7 @@ function serializeVolume(volume: Volume): Document {
         document.add(document.createPair("external", { name: volume.externalName }))
     }
     
-    if(volume.labels.some(f => true)){
+    if(volume.labels?.length > 0){
         document.add(document.createPair("labels", serializeKeyValuePairs(volume.labels)))
     }
 
@@ -83,7 +85,7 @@ function serializeNetwork(network: Network) : Document {
         document.add(document.createPair("external", { name: network.externalName }))
     }
     
-    if(network.labels.some(f => true)){
+    if(network.labels?.length > 0){
         document.add(document.createPair("labels", serializeKeyValuePairs(network.labels)))
     }
 

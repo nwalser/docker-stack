@@ -1,0 +1,143 @@
+[
+    {
+        "id": "simple-mongo",
+        "name": "Simple MongoDB Stack",
+        "description": "Simple MongoDB instance with public facing port.",
+        "compose": {
+            "version": "3.1",
+            "services": [
+                {
+                    "id": "mongo",
+                    "image": "mongo",
+                    "tag": "6",
+                    "networkIds": [
+                        {
+                            "networkId": "network1"
+                        }
+                    ],
+                    "ports": [
+                        {
+                            "container": 27017,
+                            "host": 27017
+                        }
+                    ],
+                    "volumeIds": [
+                        {
+                            "volumeId": "mongo-data",
+                            "mountPath": "/data/db"
+                        },
+                        {
+                            "volumeId": "mongo-config",
+                            "mountPath": "/data/configdb"
+                        }
+                    ],
+                    "environmentVariables": [
+                        {
+                            "key": "MONGO_INITDB_ROOT_USERNAME",
+                            "value": "root"
+                        },
+                        {
+                            "key": "MONGO_INITDB_ROOT_PASSWORD",
+                            "value": "root"
+                        }
+                    ]
+                }
+            ],
+            "volumes": [
+                {
+                    "id": "mongo-data",
+                    "name": "mongo-data",
+                    "driver": "default"
+                },
+                {
+                    "id": "mongo-config",
+                    "name": "mongo-config",
+                    "driver": "default"
+                }
+            ],
+            "comment": ""
+        }
+    },    
+    {
+        "id": "1",
+        "name": "MongoDB Minio Stack",
+        "description": "Simple MongoDB instance with public facing port.",
+        "compose": {
+            "version": "3.1",
+            "services": [
+                {
+                    "id": "mongo",
+                    "image": "mongo",
+                    "tag": "4.2",
+                    "networkIds": [
+                        {
+                            "networkId": "network1"
+                        }
+                    ],
+                    "ports": [
+                        {
+                            "container": 1999,
+                            "host": 4000
+                        }
+                    ],
+                    "volumeIds": [
+                        {
+                            "volumeId": "volume1",
+                            "mountPath": "/mnt/data"
+                        }
+                    ],
+                    "environmentVariables": [
+                        {
+                            "key": "AGE",
+                            "value": "18"
+                        }
+                    ]
+                },
+                {
+                    "id": "minio",
+                    "image": "minio",
+                    "tag": "12.0",
+                    "ports": [],
+                    "environmentVariables": [],
+                    "volumeIds": [],
+                    "networkIds": []
+                }
+            ],
+            "volumes": [
+                {
+                    "id": "volume1",
+                    "name": "myVolumeName",
+                    "driver": "default",
+                    "externalName": "somename",
+                    "labels": [
+                        {
+                            "key": "hey",
+                            "value": "world"
+                        }
+                    ]
+                }
+            ],
+            "networks": [
+                {
+                    "id": "network1",
+                    "name": "myCustomName",
+                    "driver": "bridge",
+                    "externalName": "someexternalNetwork",
+                    "labels": [
+                        {
+                            "key": "Hello",
+                            "value": "World"
+                        }
+                    ],
+                    "driverOptions": [
+                        {
+                            "key": "Some",
+                            "value": "Options"
+                        }
+                    ]
+                }
+            ],
+            "comment": ""
+        }
+    }
+]

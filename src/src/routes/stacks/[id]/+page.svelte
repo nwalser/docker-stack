@@ -3,10 +3,13 @@
 	import { error } from '@sveltejs/kit';
 	import { Card } from 'flowbite-svelte';
 	import Editor from 'src/components/Editor.svelte';
-	import { stringifyDockerCompose } from '../Serializer';
-	import { stackStore } from '../StackStore';
+	import { stringifyDockerCompose } from 'src/data/stackPages/DockerComposeSerializer';
+	import { getStackPage } from '../../../data/stackPages/StackData';
 
-	let stack = $stackStore.find((t) => t.name == $page.params.name);
+	let stackId = $page.params.id;
+
+
+	let stack = getStackPage(stackId)!;
 	if (!stack) throw error(404, 'Not found');
 </script>
 

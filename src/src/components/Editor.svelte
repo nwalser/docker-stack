@@ -48,7 +48,8 @@
 			},
 			overviewRulerLanes: 0,
 			readOnly: false,
-			domReadOnly: false
+			domReadOnly: false,
+			theme: "vs-dark"
 		});
 
 		let ignoreEvent = false;

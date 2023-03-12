@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { PossiblePort } from '../../ImageModel';
+	import type { PossiblePort } from '../../../../data/images/ImageModel';
 	export let possiblePort: PossiblePort;
 </script>
 

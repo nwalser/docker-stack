@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { PossibleVolume } from '../../ImageModel';
+	import type { PossibleVolume } from '../../../../data/images/ImageModel';
 	export let possibleVolume: PossibleVolume;
 </script>
 

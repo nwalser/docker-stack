@@ -2,24 +2,10 @@ export class Image {
     name: string = "";
     tag: string = "";
 
-    description: string = "";
-
     possibleVolumes: PossibleVolume[] = [];
     possibleVariables: PossibleVariable[] = [];
     possiblePorts: PossiblePort[] = [];
 }
-
-export class MultiVersionImage {
-    name: string = "";
-    tags: string[] = [];
-
-    description: string = "";
-
-    possibleVolumes: PossibleVolume[] = [];
-    possibleVariables: PossibleVariable[] = [];
-    possiblePorts: PossiblePort[] = [];
-}
-
 
 export class PossibleVolume {
     name: string;
