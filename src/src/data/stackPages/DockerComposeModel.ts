@@ -1,8 +1,8 @@
 export class DockerCompose {
     version: string;
     services: Service[] = [];
-    volumes: Volume[] = [];
-    networks: Network[] = [];
+    volumes: Volume[] | null = [];
+    networks: Network[] | null = [];
     comment: string = "";
 
     constructor(version: string){

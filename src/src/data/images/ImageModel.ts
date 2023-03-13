@@ -1,8 +1,6 @@
 export class Image {
     name: string = "";
-    tags: string[] = [];
-
-    description: string = "";
+    tag: string = "";
 
     possibleVolumes: PossibleVolume[] = [];
     possibleVariables: PossibleVariable[] = [];

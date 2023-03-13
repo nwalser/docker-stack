@@ -1,78 +1,97 @@
 <script lang="ts">
-	import Tag from './Tag.svelte';
 	import { page } from '$app/stores';
-	import Editor from 'src/components/Editor.svelte';
-	import { stringifyDockerCompose } from 'src/data/Serializer';
-	import { templatesStore } from 'src/routes/templates/[name]/TemplateStore';
 	import Empty from './Empty.svelte';
-	import { Image, PossiblePort, PossibleVariable, PossibleVolume } from './ImageModel';
-	import { imagesStore } from './ImageStore';
 	import Port from './Port.svelte';
 	import Variable from './Variable.svelte';
 	import Volume from './Volume.svelte';
 	import { error } from '@sveltejs/kit';
-	import TemplatePreview from 'src/routes/templates/[name]/TemplatePreview.svelte';
+	import { getImage } from '../../../../data/images/ImageData';
+	import { getStackPage, getStackPagesUsingImage } from 'src/data/stackPages/StackData';
+	import { getImagePage } from 'src/data/imagePages/ImagePageData';
+	import LargeStackPreview from 'src/routes/stacks/LargeStackPreview.svelte';
+	import SmallStackPreview from 'src/routes/stacks/SmallStackPreview.svelte';
+	import H1 from 'src/components/typo/H1.svelte';
+	import P from 'src/components/typo/P.svelte';
+	import Grid from 'src/components/typo/Grid.svelte';
+	import H2 from 'src/components/typo/H2.svelte';
+	import { Img } from 'flowbite-svelte';
+	import H3 from 'src/components/typo/H3.svelte';
+	import ImageHeader from 'src/components/typo/ImageHeader.svelte';
+	import SvelteSeo from 'svelte-seo';
 
 	let name = $page.params.name;
 	let tag = $page.params.tag;
 
-	let image = $imagesStore.find((t) => t.name == name && t.tags.some((t) => t == tag))!;
-	if (!image) throw error(404, 'Not found');
+	let imagePage = getImagePage(name, tag)!;
+	let image = getImage(name, tag)!;
+	let stackSpotlight = getStackPage(imagePage.stackSpotlight)!;
 
-	let templates = $templatesStore.filter((t) => t.name == $page.params.name);
+	if (!imagePage || !image || !stackSpotlight) throw error(404, 'Not found');
+
+	let stacks = getStackPagesUsingImage(name);
 </script>
 
+<SvelteSeo
+	title="{imagePage.readableName} {imagePage.tag} Docker Image Specifications - Docker Stack"
+	description={imagePage.description}
+	openGraph={{
+		site_name: 'Docker Stack',
+		title:
+			imagePage.readableName + ' ' + imagePage.tag + ' Docker Image Specifications - Docker Stack',
+		description: imagePage.description,
+		images: [
+			{
+				url: imagePage.imageUrl
+			}
+		]
+	}}
+/>
 
-<div class="grid grid-cols-4 gap-8 pt-4">
-	<div class="col-span-3">
-        <h1 class="text-4xl font-bold dark:text-white mt-4">{name}:{tag} image reference</h1>
-        <p class="text-lg font-normal dark:text-gray-300 text-justify">{image?.description}</p>
+<ImageHeader src={imagePage.imageUrl} alt="{imagePage.readableName} logo" />
 
-        <h3 class="text-2xl font-bold dark:text-white mt-4">Templates</h3>
-        <div class="col-span-1 grid grid-cols-2 gap-2">
-            {#each templates as templates}
-                <TemplatePreview template={templates} />
-            {:else}
-                <Empty />
-            {/each}
-        </div>
+<div class="grid grid-cols-3 gap-8 pt-4">
+	<div class="col-span-2 -mt-6">
+		<H1>{imagePage.readableName} {imagePage.tag} Docker Image Specifications</H1>
+		<P>{imagePage?.description}</P>
+
+		<LargeStackPreview stackPage={stackSpotlight} />
+
+		<H2>Stacks using this Image</H2>
+		<Grid cols={2}>
+			{#each stacks as stackPage}
+				<SmallStackPreview {stackPage} />
+			{:else}
+				<Empty />
+			{/each}
+		</Grid>
 	</div>
 
-	<div class="col-span-1">
-		<div class="col-span-1 grid grid-cols-1 gap-2">
-			<h3 class="text-2xl font-bold dark:text-white mt-4">Other Versions</h3>
-			<div class="flex flex-wrap">
-				{#each image.tags as tag}
-					<Tag tag={tag} />
-				{:else}
-					<Empty />
-				{/each}
-			</div>
-		</div>
-
-		<div class="col-span-1 grid grid-cols-1 gap-2">
-			<h3 class="text-2xl font-bold dark:text-white mt-4">Ports</h3>
-			{#each image?.possiblePorts as port}
+	<div class="col-span-1 -mt-4">
+		<H3>Ports</H3>
+		<Grid cols={1}>
+			{#each image.possiblePorts as port}
 				<Port possiblePort={port} />
 			{:else}
 				<Empty />
 			{/each}
-		</div>
-		<div class="col-span-1 grid grid-cols-1 gap-2">
-			<h3 class="text-2xl font-bold dark:text-white mt-4">Volumes</h3>
-			{#each image?.possibleVolumes as volume}
+		</Grid>
+
+		<H3>Volumes</H3>
+		<Grid cols={1}>
+			{#each image.possibleVolumes as volume}
 				<Volume possibleVolume={volume} />
 			{:else}
 				<Empty />
 			{/each}
-		</div>
-		<div class="col-span-1 grid grid-cols-1 gap-2">
-			<h3 class="text-2xl font-bold dark:text-white mt-4">Variables</h3>
-			{#each image?.possibleVariables as variable}
+		</Grid>
+
+		<H3>Variables</H3>
+		<Grid cols={1}>
+			{#each image.possibleVariables as variable}
 				<Variable possibleVariable={variable} />
 			{:else}
 				<Empty />
 			{/each}
-		</div>
+		</Grid>
 	</div>
 </div>
