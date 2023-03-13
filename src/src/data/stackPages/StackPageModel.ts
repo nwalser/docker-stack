@@ -4,6 +4,7 @@ export class StackPage {
     id: string;
     name: string = "";
     description: string = "";
+    imageUrl: string = "";
 
     compose: DockerCompose;
 

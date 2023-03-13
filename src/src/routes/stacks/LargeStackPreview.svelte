@@ -22,10 +22,10 @@
 	<div class="block p-4">
 		<div class="flex">
 			<a href="/stacks/{stackPage.id}/">
-				<p class="mb-0 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+				<p class="mb-0 text-xl font-bold tracking-tight text-gray-900 dark:text-white line-clamp-1">
 					{stackPage.name}
 				</p>
-				<p class="font-normal text-gray-700 dark:text-gray-400">{stackPage.description}</p>
+				<p class="font-normal text-gray-700 dark:text-gray-400 line-clamp-1">{stackPage.description}</p>
 			</a>
 
 			<button
