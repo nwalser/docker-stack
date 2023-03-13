@@ -12,6 +12,7 @@
 	import ImagePreview from 'src/routes/images/ImagePreview.svelte';
 	import Empty from 'src/routes/images/[name]/[tag]/Empty.svelte';
 	import { getStackPage } from '../../../data/stackPages/StackData';
+	import SvelteSeo from 'svelte-seo';
 
 	let stackId = $page.params.id;
 
@@ -22,6 +23,21 @@
 		.map((s) => getImagePage(s.image, s.tag)!)
 		.flatMap((f) => (f ? [f] : []));
 </script>
+
+<SvelteSeo
+	title="{stack.name} - Docker Stack"
+	description={stack.description}
+	openGraph={{
+		site_name: 'Docker Stack',
+		title: stack.name + " - Docker Stack",
+		description: stack.description,
+		images: [
+			{
+				url: stack.imageUrl
+			}
+		]
+	}}
+/>
 
 <ImageHeader src={stack.imageUrl} alt="{stack.name} logo" />
 
@@ -46,5 +62,7 @@
 				<Empty />
 			{/each}
 		</Grid>
+
+		<!-- <H3>Exposed Ports</H3> -->
 	</div>
 </div>

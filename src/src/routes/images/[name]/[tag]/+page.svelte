@@ -17,6 +17,7 @@
 	import { Img } from 'flowbite-svelte';
 	import H3 from 'src/components/typo/H3.svelte';
 	import ImageHeader from 'src/components/typo/ImageHeader.svelte';
+	import SvelteSeo from 'svelte-seo';
 
 	let name = $page.params.name;
 	let tag = $page.params.tag;
@@ -30,7 +31,23 @@
 	let stacks = getStackPagesUsingImage(name);
 </script>
 
-<ImageHeader src="{imagePage.imageUrl}" alt="{imagePage.readableName} logo" />
+<SvelteSeo
+	title="{imagePage.readableName} {imagePage.tag} Docker Image Specifications - Docker Stack"
+	description={imagePage.description}
+	openGraph={{
+		site_name: 'Docker Stack',
+		title:
+			imagePage.readableName + ' ' + imagePage.tag + ' Docker Image Specifications - Docker Stack',
+		description: imagePage.description,
+		images: [
+			{
+				url: imagePage.imageUrl
+			}
+		]
+	}}
+/>
+
+<ImageHeader src={imagePage.imageUrl} alt="{imagePage.readableName} logo" />
 
 <div class="grid grid-cols-3 gap-8 pt-4">
 	<div class="col-span-2 -mt-6">

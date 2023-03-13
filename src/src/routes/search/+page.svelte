@@ -7,6 +7,7 @@
 	import ImagePreview from '../images/ImagePreview.svelte';
 	import Empty from '../images/[name]/[tag]/Empty.svelte';
 	import SmallStackPreview from '../stacks/SmallStackPreview.svelte';
+	import SvelteSeo from 'svelte-seo';
 
 	let foundStacks = derived((SearchStore), (searchStore) => {
 		return searchStackPages(searchStore);
@@ -16,6 +17,17 @@
 		return searchImagePages(searchStore);
 	});
 </script>
+
+
+<SvelteSeo
+	title="Search - Docker Stack"
+	description="Search for premade Docker Compose templates on docker-stack."
+	openGraph={{
+		site_name: 'Docker Stack',
+		title: "Search - Docker Stack",
+		description: "Search for premade Docker Compose templates on docker-stack."
+	}}
+/>
 
 <h3 class="text-2xl font-bold dark:text-white mt-4">Stacks</h3>
 <div class="grid grid-cols-4 gap-4 pt-4">
