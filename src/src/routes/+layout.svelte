@@ -29,7 +29,7 @@
 	let site = {
 		name: 'Docker Stack',
 		href: '/',
-		img: 'https://flowbite.com/images/logo.svg'
+		img: '/favicon.png'
 	};
 </script>
 
