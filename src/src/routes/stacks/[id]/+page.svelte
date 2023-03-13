@@ -2,6 +2,11 @@
 	import { page } from '$app/stores';
 	import { error } from '@sveltejs/kit';
 	import Editor from 'src/components/Editor.svelte';
+	import Grid from 'src/components/typo/Grid.svelte';
+	import H1 from 'src/components/typo/H1.svelte';
+	import H3 from 'src/components/typo/H3.svelte';
+	import ImageHeader from 'src/components/typo/ImageHeader.svelte';
+	import P from 'src/components/typo/P.svelte';
 	import { getImagePage } from 'src/data/imagePages/ImagePageData';
 	import { stringifyDockerCompose } from 'src/data/stackPages/DockerComposeSerializer';
 	import ImagePreview from 'src/routes/images/ImagePreview.svelte';
@@ -18,11 +23,12 @@
 		.flatMap((f) => (f ? [f] : []));
 </script>
 
-<h1 class="text-4xl font-bold dark:text-white mt-4">{stack.name}</h1>
+<ImageHeader src={stack.imageUrl} alt="{stack.name} logo" />
 
 <div class="grid grid-cols-3 gap-8 pt-4">
-	<div class="col-span-2">
-		<p class="text-lg font-normal dark:text-gray-300 text-justify">{stack.description}</p>
+	<div class="col-span-2 -mt-6">
+		<H1>{stack.name}</H1>
+		<P>{stack.description}</P>
 
 		<div
 			class="block overflow-hidden bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
@@ -31,14 +37,14 @@
 		</div>
 	</div>
 
-	<div class="col-span-1">
-		<div class="col-span-1 grid grid-cols-1 gap-2">
-			<h3 class="text-2xl font-bold dark:text-white mt-0">Images used</h3>
+	<div class="col-span-1 -mt-4">
+		<H3>Images used</H3>
+		<Grid cols={1}>
 			{#each images as image}
 				<ImagePreview {image} />
 			{:else}
 				<Empty />
 			{/each}
-		</div>
+		</Grid>
 	</div>
 </div>
