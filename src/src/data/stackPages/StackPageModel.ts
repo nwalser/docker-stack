@@ -7,9 +7,18 @@ export class StackPage {
     imageUrl: string = "";
 
     compose: DockerCompose;
+    exposedPorts: ExposedPort[] = [];
 
-    constructor(id: string, compose: DockerCompose){
+    constructor(id: string, compose: DockerCompose) {
         this.id = id;
         this.compose = compose;
     }
+}
+
+export class ExposedPort {
+    name: string = "";
+    description: string = "";
+
+    port: number = 0;
+    webInterface: boolean = false;
 }

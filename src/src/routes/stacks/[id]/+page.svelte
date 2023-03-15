@@ -15,6 +15,8 @@
 	import FileView from '../../../components/FileView.svelte';
 	import StackSetup from '../StackSetup.svelte';
 	import H2 from 'src/components/typo/H2.svelte';
+	import { StackPage } from 'src/data/stackPages/StackPageModel';
+	import ExposedPort from './ExposedPort.svelte';
 
 	let stackId = $page.params.id;
 
@@ -31,7 +33,7 @@
 	description={stack.description}
 	openGraph={{
 		site_name: 'Docker Stack',
-		title: stack.name + " - Docker Stack",
+		title: stack.name + ' - Docker Stack',
 		description: stack.description,
 		images: [
 			{
@@ -48,16 +50,26 @@
 		<H1>{stack.name}</H1>
 		<P>{stack.description}</P>
 
-		<FileView fileName="docker-compose.yml" language="yaml" stringFileContent={stringifyDockerCompose(stack.compose)} fileDownloadUrl="/stacks/{stack.id}/docker-compose"></FileView>
-	
+		<FileView
+			fileName="docker-compose.yml"
+			language="yaml"
+			stringFileContent={stringifyDockerCompose(stack.compose)}
+			fileDownloadUrl="/stacks/{stack.id}/docker-compose"
+		/>
+
 		<H2>Run this Stack</H2>
-		<StackSetup stackId={stack.id}/>
+		<StackSetup stackId={stack.id} />
 	</div>
 
 	<div class="col-span-1 -mt-4">
 		<H3>Exposed Ports</H3>
-		<P>Add respective links to the interfaces as well.</P>
-
+		<Grid cols={1}>
+			{#each stack.exposedPorts as exposedPort}
+				<ExposedPort {exposedPort} />
+			{:else}
+				<Empty />
+			{/each}
+		</Grid>
 
 		<H3>Images used</H3>
 		<Grid cols={1}>

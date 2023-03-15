@@ -4,6 +4,20 @@
         "name": "Persistent MongoDB Stack",
         "description": "Simple MongoDB instance with public facing port and persistent storage.",
         "imageUrl": "https://www.nathaniel-walser.com/docker-compose-templates/mongo/header.svg",
+        "exposedPorts": [
+            {
+                "name": "MongoDB Wire Protocol",
+                "description": "Interface for communication with the mongo db.",
+                "port": 27017,
+                "webInterface": false
+            },
+            {
+                "name": "MongoDB Express",
+                "description": "MongoDB Express web interface",
+                "port": 27017,
+                "webInterface": true
+            }
+        ],
         "compose": {
             "version": "3.1",
             "services": [

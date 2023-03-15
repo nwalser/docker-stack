@@ -3,9 +3,7 @@
 	export let possibleVolume: PossibleVolume;
 </script>
 
-<a
-	class="block p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
->
+<div class="block p-4 border rounded-lg shadow bg-gray-800 border-gray-700">
 	<div class="flex">
 		<p class="mb-0 text-lg font-medium tracking-tight text-gray-900 dark:text-white">
 			{possibleVolume.name}
@@ -15,4 +13,4 @@
 		</p>
 	</div>
 	<p class="font-normal text-gray-700 dark:text-gray-400">{possibleVolume.description}</p>
-</a>
+</div>
