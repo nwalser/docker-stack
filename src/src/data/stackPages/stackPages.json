@@ -7,15 +7,9 @@
         "exposedPorts": [
             {
                 "name": "MongoDB Wire Protocol",
-                "description": "Interface for communication with the mongo db.",
+                "description": "The MongoDB Wire protocol is used to communicate with clients.",
                 "port": 27017,
                 "webInterface": false
-            },
-            {
-                "name": "MongoDB Express",
-                "description": "MongoDB Express web interface",
-                "port": 27017,
-                "webInterface": true
             }
         ],
         "compose": {
@@ -52,6 +46,20 @@
         "name": "Persistent MongoDB + Express Stack",
         "description": "Simple MongoDB instance with public facing port and a MongoDB Express Management interface.",
         "imageUrl": "https://www.nathaniel-walser.com/docker-compose-templates/mongo/header.svg",
+        "exposedPorts": [
+            {
+                "name": "MongoDB Express",
+                "description": "",
+                "port": 8081,
+                "webInterface": true
+            },
+            {
+                "name": "MongoDB Wire Protocol",
+                "description": "The MongoDB Wire protocol is used to communicate with clients.",
+                "port": 27017,
+                "webInterface": false
+            }
+        ],
         "compose": {
             "version": "3.1",
             "services": [

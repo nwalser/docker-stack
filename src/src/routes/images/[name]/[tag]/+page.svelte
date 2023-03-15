@@ -14,7 +14,6 @@
 	import P from 'src/components/typo/P.svelte';
 	import Grid from 'src/components/typo/Grid.svelte';
 	import H2 from 'src/components/typo/H2.svelte';
-	import { Img } from 'flowbite-svelte';
 	import H3 from 'src/components/typo/H3.svelte';
 	import ImageHeader from 'src/components/typo/ImageHeader.svelte';
 	import SvelteSeo from 'svelte-seo';

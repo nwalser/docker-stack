@@ -9,7 +9,7 @@
 
 	export let value: string;
 	export let language: string;
-	export let minHeight: number = 200;
+	export let minHeight: number = 75;
 	export let maxHeight: number = 1000;
 
 	let container: HTMLDivElement;
