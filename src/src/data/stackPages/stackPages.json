@@ -11,11 +11,6 @@
                     "id": "mongo",
                     "image": "mongo",
                     "tag": "6",
-                    "networkIds": [
-                        {
-                            "networkId": "network1"
-                        }
-                    ],
                     "ports": [
                         {
                             "container": 27017,
@@ -26,20 +21,6 @@
                         {
                             "volumeId": "mongo-data",
                             "mountPath": "/data/db"
-                        },
-                        {
-                            "volumeId": "mongo-config",
-                            "mountPath": "/data/configdb"
-                        }
-                    ],
-                    "environmentVariables": [
-                        {
-                            "key": "MONGO_INITDB_ROOT_USERNAME",
-                            "value": "root"
-                        },
-                        {
-                            "key": "MONGO_INITDB_ROOT_PASSWORD",
-                            "value": "root"
                         }
                     ]
                 }
@@ -47,9 +28,6 @@
             "volumes": [
                 {
                     "id": "mongo-data"
-                },
-                {
-                    "id": "mongo-config"
                 }
             ],
             "comment": ""
@@ -77,20 +55,6 @@
                         {
                             "volumeId": "mongo-data",
                             "mountPath": "/data/db"
-                        },
-                        {
-                            "volumeId": "mongo-config",
-                            "mountPath": "/data/configdb"
-                        }
-                    ],
-                    "environmentVariables": [
-                        {
-                            "key": "MONGO_INITDB_ROOT_USERNAME",
-                            "value": "root"
-                        },
-                        {
-                            "key": "MONGO_INITDB_ROOT_PASSWORD",
-                            "value": "root"
                         }
                     ]
                 },
@@ -115,9 +79,6 @@
             "volumes": [
                 {
                     "id": "mongo-data"
-                },
-                {
-                    "id": "mongo-config"
                 }
             ]
         }
