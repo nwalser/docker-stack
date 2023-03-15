@@ -4,6 +4,14 @@
         "name": "Persistent MongoDB Stack",
         "description": "Simple MongoDB instance with public facing port and persistent storage.",
         "imageUrl": "https://www.nathaniel-walser.com/docker-compose-templates/mongo/header.svg",
+        "exposedPorts": [
+            {
+                "name": "MongoDB Wire Protocol",
+                "description": "The MongoDB Wire protocol is used to communicate with clients.",
+                "port": 27017,
+                "webInterface": false
+            }
+        ],
         "compose": {
             "version": "3.1",
             "services": [
@@ -11,11 +19,6 @@
                     "id": "mongo",
                     "image": "mongo",
                     "tag": "6",
-                    "networkIds": [
-                        {
-                            "networkId": "network1"
-                        }
-                    ],
                     "ports": [
                         {
                             "container": 27017,
@@ -26,20 +29,6 @@
                         {
                             "volumeId": "mongo-data",
                             "mountPath": "/data/db"
-                        },
-                        {
-                            "volumeId": "mongo-config",
-                            "mountPath": "/data/configdb"
-                        }
-                    ],
-                    "environmentVariables": [
-                        {
-                            "key": "MONGO_INITDB_ROOT_USERNAME",
-                            "value": "root"
-                        },
-                        {
-                            "key": "MONGO_INITDB_ROOT_PASSWORD",
-                            "value": "root"
                         }
                     ]
                 }
@@ -47,9 +36,6 @@
             "volumes": [
                 {
                     "id": "mongo-data"
-                },
-                {
-                    "id": "mongo-config"
                 }
             ],
             "comment": ""
@@ -60,6 +46,20 @@
         "name": "Persistent MongoDB + Express Stack",
         "description": "Simple MongoDB instance with public facing port and a MongoDB Express Management interface.",
         "imageUrl": "https://www.nathaniel-walser.com/docker-compose-templates/mongo/header.svg",
+        "exposedPorts": [
+            {
+                "name": "MongoDB Express",
+                "description": "",
+                "port": 8081,
+                "webInterface": true
+            },
+            {
+                "name": "MongoDB Wire Protocol",
+                "description": "The MongoDB Wire protocol is used to communicate with clients.",
+                "port": 27017,
+                "webInterface": false
+            }
+        ],
         "compose": {
             "version": "3.1",
             "services": [
@@ -77,20 +77,6 @@
                         {
                             "volumeId": "mongo-data",
                             "mountPath": "/data/db"
-                        },
-                        {
-                            "volumeId": "mongo-config",
-                            "mountPath": "/data/configdb"
-                        }
-                    ],
-                    "environmentVariables": [
-                        {
-                            "key": "MONGO_INITDB_ROOT_USERNAME",
-                            "value": "root"
-                        },
-                        {
-                            "key": "MONGO_INITDB_ROOT_PASSWORD",
-                            "value": "root"
                         }
                     ]
                 },
@@ -115,9 +101,6 @@
             "volumes": [
                 {
                     "id": "mongo-data"
-                },
-                {
-                    "id": "mongo-config"
                 }
             ]
         }

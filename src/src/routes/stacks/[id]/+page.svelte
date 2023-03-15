@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import { error } from '@sveltejs/kit';
-	import Editor from 'src/components/Editor.svelte';
 	import Grid from 'src/components/typo/Grid.svelte';
 	import H1 from 'src/components/typo/H1.svelte';
 	import H3 from 'src/components/typo/H3.svelte';
@@ -13,6 +12,11 @@
 	import Empty from 'src/routes/images/[name]/[tag]/Empty.svelte';
 	import { getStackPage } from '../../../data/stackPages/StackData';
 	import SvelteSeo from 'svelte-seo';
+	import FileView from '../../../components/FileView.svelte';
+	import StackSetup from '../StackSetup.svelte';
+	import H2 from 'src/components/typo/H2.svelte';
+	import { StackPage } from 'src/data/stackPages/StackPageModel';
+	import ExposedPort from './ExposedPort.svelte';
 
 	let stackId = $page.params.id;
 
@@ -29,7 +33,7 @@
 	description={stack.description}
 	openGraph={{
 		site_name: 'Docker Stack',
-		title: stack.name + " - Docker Stack",
+		title: stack.name + ' - Docker Stack',
 		description: stack.description,
 		images: [
 			{
@@ -46,14 +50,27 @@
 		<H1>{stack.name}</H1>
 		<P>{stack.description}</P>
 
-		<div
-			class="block overflow-hidden bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
-		>
-			<Editor value={stringifyDockerCompose(stack.compose)} language="yaml" />
-		</div>
+		<FileView
+			fileName="docker-compose.yml"
+			language="yaml"
+			stringFileContent={stringifyDockerCompose(stack.compose)}
+			fileDownloadUrl="/stacks/{stack.id}/docker-compose"
+		/>
+
+		<H2>Run this Stack</H2>
+		<StackSetup stackId={stack.id} />
 	</div>
 
 	<div class="col-span-1 -mt-4">
+		<H3>Exposed Ports</H3>
+		<Grid cols={1}>
+			{#each stack.exposedPorts as exposedPort}
+				<ExposedPort {exposedPort} />
+			{:else}
+				<Empty />
+			{/each}
+		</Grid>
+
 		<H3>Images used</H3>
 		<Grid cols={1}>
 			{#each images as image}
@@ -62,7 +79,5 @@
 				<Empty />
 			{/each}
 		</Grid>
-
-		<!-- <H3>Exposed Ports</H3> -->
 	</div>
 </div>
