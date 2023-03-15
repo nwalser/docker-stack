@@ -2,7 +2,7 @@
 	import FileView from "src/components/FileView.svelte";
 
     export let stackId: string;
-    export let hostUrl: string = "https://docker-stack.com";
+    export let hostUrl: string = "https://www.docker-stack.com";
 
     let fileContents = 
 `mkdir ${ stackId }
