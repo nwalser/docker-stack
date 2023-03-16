@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Tooltip } from 'flowbite-svelte';
-import type { ExposedPort } from 'src/data/stackPages/StackPageModel';
+	import type { ExposedPort } from 'src/data/stacks/StackPageModel';
 
 	export let exposedPort: ExposedPort;
 </script>

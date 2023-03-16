@@ -5,7 +5,6 @@
 	import Variable from './Variable.svelte';
 	import Volume from './Volume.svelte';
 	import { error } from '@sveltejs/kit';
-	import { getStack, getStackPagesUsingImage } from 'src/data/stackPages/StackData';
 	import LargeStackPreview from 'src/routes/stacks/LargeStackPreview.svelte';
 	import SmallStackPreview from 'src/routes/stacks/SmallStackPreview.svelte';
 	import H1 from 'src/components/typo/H1.svelte';
@@ -16,6 +15,7 @@
 	import ImageHeader from 'src/components/typo/ImageHeader.svelte';
 	import SvelteSeo from 'svelte-seo';
 	import { getImage } from 'src/data/images/ImageData';
+	import { getStack, getStacksByImage } from 'src/data/stacks/StackData';
 
 	let name = $page.params.name;
 	let tag = $page.params.tag;
@@ -25,7 +25,7 @@
 
 	if (!image || !stackSpotlight) throw error(404, 'Not found');
 
-	let stacks = getStackPagesUsingImage(name);
+	let stacks = getStacksByImage(name);
 </script>
 
 <SvelteSeo
@@ -56,7 +56,7 @@
 		<H2>Stacks using this Image</H2>
 		<Grid cols={2}>
 			{#each stacks as stackPage}
-				<SmallStackPreview {stackPage} />
+				<SmallStackPreview stack={stackPage} />
 			{:else}
 				<Empty />
 			{/each}

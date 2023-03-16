@@ -13,18 +13,18 @@ webInterface = false
 version = "3.1"
 comment = ""
 
-  [[compose.services]]
-  id = "mongo"
-  image = "mongo"
-  tag = "6"
+[[compose.services]]
+id = "mongo"
+image = "mongo"
+tag = "6"
 
-    [[compose.services.ports]]
-    container = 27_017
-    host = 27_017
+[[compose.services.ports]]
+container = 27_017
+host = 27_017
 
-    [[compose.services.volumeIds]]
-    volumeId = "mongo-data"
-    mountPath = "/data/db"
+[[compose.services.volumeIds]]
+volumeId = "mongo-data"
+mountPath = "/data/db"
 
-  [[compose.volumes]]
-  id = "mongo-data"
+[[compose.volumes]]
+id = "mongo-data"

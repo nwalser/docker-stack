@@ -12,7 +12,6 @@ export class Image {
 export class ImagePage {
     name: string;
     readableName: string;
-    tag: string;
 
     imageUrl: string;
 

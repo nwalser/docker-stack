@@ -6,15 +6,15 @@ import { parse } from "toml";
 let stackModules = import.meta.glob('./../data/stacks/*.toml', { as: 'raw', eager: true });
 
 export function getStack(stackId: string): Stack | undefined {
-    return getStackPages().find(s => s.id == stackId);
+    return getStacks().find(s => s.id == stackId);
 }
 
 
-export function getStackPagesUsingImage(image: string) {
-    return getStackPages().filter(s => s.compose.services.some(s => s.image == image));
+export function getStacksByImage(image: string) {
+    return getStacks().filter(s => s.compose.services.some(s => s.image == image));
 }
 
-export function getStackPages(): Stack[] {
+export function getStacks(): Stack[] {
     let stacks: Stack[] = [];
 
     for (const key in stackModules) {
@@ -27,14 +27,14 @@ export function getStackPages(): Stack[] {
 }
 
 export function searchStacks(search: string) {
-    if (search == "") return getStackPages();
+    if (search == "") return getStacks();
 
     const options = {
         includeScore: true,
         keys: ['name', 'description']
     }
 
-    const fuse = new Fuse(getStackPages(), options)
+    const fuse = new Fuse(getStacks(), options)
 
     const result = fuse.search(search)
 
