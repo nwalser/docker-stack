@@ -12,7 +12,6 @@
 	} from 'flowbite-svelte';
 	import { getImages } from 'src/data/images/ImageData';
 	import { getStackPages } from 'src/data/stackPages/StackData';
-	import { getImagePages } from 'src/data/imagePages/ImagePageData';
 
 	let search = '';
 
@@ -58,7 +57,7 @@
 						<svelte:fragment slot="subtext">
 							<span
 								class="inline-flex justify-center items-center px-2 ml-3 text-sm font-medium text-gray-800 bg-gray-200 rounded-full dark:bg-gray-700 dark:text-gray-300"
-								>{getImagePages().length}</span
+								>{getImages().length}</span
 							>
 						</svelte:fragment>
 					</SidebarItem>

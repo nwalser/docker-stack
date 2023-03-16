@@ -1,9 +1,9 @@
 import { error } from '@sveltejs/kit';
 import { stringifyDockerCompose } from 'src/data/stackPages/DockerComposeSerializer';
-import { getStackPage } from 'src/data/stackPages/StackData';
+import { getStack } from 'src/data/stackPages/StackData';
 
 export async function GET({params}) {
-    let stackPage = getStackPage(params.id)!;
+    let stackPage = getStack(params.id)!;
     
     if(!stackPage)
         throw error(400, 'This stack does not exist.');

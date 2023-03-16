@@ -1,31 +1,30 @@
 <script>
 	import { page } from '$app/stores';
-	import { searchImagePages } from 'src/data/imagePages/ImagePageData';
-	import { SearchStore } from 'src/data/search/Search';
-	import { searchStackPages } from 'src/data/stackPages/StackData';
+	import { searchStacks } from 'src/data/stackPages/StackData';
 	import { derived, writable } from 'svelte/store';
 	import ImagePreview from '../images/ImagePreview.svelte';
 	import Empty from '../images/[name]/[tag]/Empty.svelte';
 	import SmallStackPreview from '../stacks/SmallStackPreview.svelte';
 	import SvelteSeo from 'svelte-seo';
+	import { SearchStore } from 'src/data/search/Search';
+	import { searchImages } from 'src/data/images/ImageData';
 
-	let foundStacks = derived((SearchStore), (searchStore) => {
-		return searchStackPages(searchStore);
+	let foundStacks = derived(SearchStore, (searchStore) => {
+		return searchStacks(searchStore);
 	});
 
-	let foundImages = derived((SearchStore), (searchStore) => {
-		return searchImagePages(searchStore);
+	let foundImages = derived(SearchStore, (searchStore) => {
+		return searchImages(searchStore);
 	});
 </script>
-
 
 <SvelteSeo
 	title="Search - Docker Stack"
 	description="Search for premade Docker Compose templates on docker-stack."
 	openGraph={{
 		site_name: 'Docker Stack',
-		title: "Search - Docker Stack",
-		description: "Search for premade Docker Compose templates on docker-stack."
+		title: 'Search - Docker Stack',
+		description: 'Search for premade Docker Compose templates on docker-stack.'
 	}}
 />
 

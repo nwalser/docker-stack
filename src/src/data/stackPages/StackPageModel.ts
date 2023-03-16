@@ -1,6 +1,6 @@
 import type { DockerCompose } from "./DockerComposeModel";
 
-export class StackPage {
+export class Stack {
     id: string;
     name: string = "";
     description: string = "";

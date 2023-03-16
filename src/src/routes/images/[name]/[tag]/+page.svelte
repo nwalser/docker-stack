@@ -5,9 +5,7 @@
 	import Variable from './Variable.svelte';
 	import Volume from './Volume.svelte';
 	import { error } from '@sveltejs/kit';
-	import { getImage } from '../../../../data/images/ImageData';
-	import { getStackPage, getStackPagesUsingImage } from 'src/data/stackPages/StackData';
-	import { getImagePage } from 'src/data/imagePages/ImagePageData';
+	import { getStack, getStackPagesUsingImage } from 'src/data/stackPages/StackData';
 	import LargeStackPreview from 'src/routes/stacks/LargeStackPreview.svelte';
 	import SmallStackPreview from 'src/routes/stacks/SmallStackPreview.svelte';
 	import H1 from 'src/components/typo/H1.svelte';
@@ -17,41 +15,41 @@
 	import H3 from 'src/components/typo/H3.svelte';
 	import ImageHeader from 'src/components/typo/ImageHeader.svelte';
 	import SvelteSeo from 'svelte-seo';
+	import { getImage } from 'src/data/images/ImageData';
 
 	let name = $page.params.name;
 	let tag = $page.params.tag;
 
-	let imagePage = getImagePage(name, tag)!;
 	let image = getImage(name, tag)!;
-	let stackSpotlight = getStackPage(imagePage.stackSpotlight)!;
+	let stackSpotlight = getStack(image.page.stackSpotlight)!;
 
-	if (!imagePage || !image || !stackSpotlight) throw error(404, 'Not found');
+	if (!image || !stackSpotlight) throw error(404, 'Not found');
 
 	let stacks = getStackPagesUsingImage(name);
 </script>
 
 <SvelteSeo
-	title="{imagePage.readableName} {imagePage.tag} Docker Image Specifications - Docker Stack"
-	description={imagePage.description}
+	title="{image.page.readableName} {image.tag} Docker Image Specifications - Docker Stack"
+	description={image.page.description}
 	openGraph={{
 		site_name: 'Docker Stack',
 		title:
-			imagePage.readableName + ' ' + imagePage.tag + ' Docker Image Specifications - Docker Stack',
-		description: imagePage.description,
+			image.page.readableName + ' ' + image.tag + ' Docker Image Specifications - Docker Stack',
+		description: image.page.description,
 		images: [
 			{
-				url: imagePage.imageUrl
+				url: image.page.imageUrl
 			}
 		]
 	}}
 />
 
-<ImageHeader src={imagePage.imageUrl} alt="{imagePage.readableName} logo" />
+<ImageHeader src={image.page.imageUrl} alt="{image.page.readableName} logo" />
 
 <div class="grid grid-cols-3 gap-8 pt-4">
 	<div class="col-span-2 -mt-6">
-		<H1>{imagePage.readableName} {imagePage.tag} Docker Image Specifications</H1>
-		<P>{imagePage?.description}</P>
+		<H1>{image.page.readableName} {image.page.tag} Docker Image Specifications</H1>
+		<P>{image.page?.description}</P>
 
 		<LargeStackPreview stackPage={stackSpotlight} />
 
