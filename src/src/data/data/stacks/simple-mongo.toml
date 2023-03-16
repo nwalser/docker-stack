@@ -1,0 +1,30 @@
+id = "simple-mongo"
+name = "Persistent MongoDB Stack"
+description = "Simple MongoDB instance with public facing port and persistent storage."
+imageUrl = "https://www.nathaniel-walser.com/docker-compose-templates/mongo/header.svg"
+
+[[exposedPorts]]
+name = "MongoDB Wire Protocol"
+description = "The MongoDB Wire protocol is used to communicate with clients."
+port = 27_017
+webInterface = false
+
+[compose]
+version = "3.1"
+comment = ""
+
+[[compose.services]]
+id = "mongo"
+image = "mongo"
+tag = "6"
+
+[[compose.services.ports]]
+container = 27_017
+host = 27_017
+
+[[compose.services.volumeIds]]
+volumeId = "mongo-data"
+mountPath = "/data/db"
+
+[[compose.volumes]]
+id = "mongo-data"

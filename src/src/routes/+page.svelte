@@ -3,12 +3,12 @@
 	import H1 from 'src/components/typo/H1.svelte';
 	import H2 from 'src/components/typo/H2.svelte';
 	import P from 'src/components/typo/P.svelte';
-	import { getImagePages } from 'src/data/imagePages/ImagePageData';
-	import { getStackPages } from 'src/data/stackPages/StackData';
 	import ImagePreview from './images/ImagePreview.svelte';
 	import Empty from './images/[name]/[tag]/Empty.svelte';
 	import StackPreview from './stacks/SmallStackPreview.svelte';
 	import SvelteSeo from 'svelte-seo';
+	import { getImages } from 'src/data/images/ImageData';
+	import { getStacks } from 'src/data/stacks/StackData';
 </script>
 
 <SvelteSeo
@@ -34,24 +34,24 @@
 
 <H2>Premade Stacks</H2>
 <Grid cols={3}>
-	{#each getStackPages().slice(0, 5) as stackPage}
-		<StackPreview {stackPage} />
+	{#each getStacks().slice(0, 5) as stackPage}
+		<StackPreview stack={stackPage} />
 	{:else}
 		<Empty />
 	{/each}
-	{#if getStackPages().length > 5}
+	{#if getStacks().length > 5}
 		<Empty text="View more Stacks" link="/stacks" />
 	{/if}
 </Grid>
 
 <H2>Premade Images</H2>
 <Grid cols={3}>
-	{#each getImagePages().slice(0, 5) as page}
+	{#each getImages().slice(0, 5) as page}
 		<ImagePreview image={page} />
 	{:else}
 		<Empty />
 	{/each}
-	{#if getImagePages().length > 5}
+	{#if getImages().length > 5}
 		<Empty text="View more Images" link="/images" />
 	{/if}
 </Grid>

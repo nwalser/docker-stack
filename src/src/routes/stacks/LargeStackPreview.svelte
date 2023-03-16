@@ -1,11 +1,11 @@
 <script lang="ts">
 	import Editor from 'src/components/Editor.svelte';
-	import { stringifyDockerCompose } from 'src/data/stackPages/DockerComposeSerializer';
-	import type { StackPage } from '../../data/stackPages/StackPageModel';
 	import { copy } from 'svelte-copy';
 	import { Button, Tooltip } from 'flowbite-svelte';
+	import type { Stack } from 'src/data/stacks/StackPageModel';
+	import { stringifyDockerCompose } from 'src/data/stacks/DockerComposeSerializer';
 
-	export let stackPage: StackPage;
+	export let stackPage: Stack;
 
 	let copyCount = 0;
 	let tooltipContent = 'Copy';

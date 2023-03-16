@@ -1,0 +1,50 @@
+name = "mongo"
+tag = "6"
+
+[page]
+readableName = "MongoDB"
+imageUrl = "https://www.nathaniel-walser.com/docker-compose-templates/mongo/header.svg"
+officialPage = "https://hub.docker.com/_/mongo"
+description = "MongoDB is a free and open-source cross-platform document-oriented database program. Classified as a NoSQL database program, MongoDB uses JSON-like documents with schemata. MongoDB is developed by MongoDB Inc., and is published under a combination of the Server Side Public License and the Apache License."
+similarImages = [ ]
+stackSpotlight = "simple-mongo"
+
+[[possibleVolumes]]
+name = "Data"
+description = "This Volume contains all the database data."
+containerPath = "/data/db"
+
+[[possibleVolumes]]
+name = "Config"
+description = "This Volume will be read for mongodb configuration files."
+containerPath = "/data/configdb"
+
+[[possibleVariables]]
+name = "MONGO_INITDB_ROOT_USERNAME"
+defaultValue = "undefined"
+description = "The username of the root user. Will only get applied on first start."
+
+[[possibleVariables]]
+name = "MONGO_INITDB_ROOT_PASSWORD"
+defaultValue = "undefined"
+description = "The password of the root user. Will only get applied on first start."
+
+[[possibleVariables]]
+name = "MONGO_INITDB_DATABASE"
+defaultValue = "undefined"
+description = "The name of the first database that gets created. Will only get applied on first start."
+
+[[possibleVariables]]
+name = "MONGO_INITDB_USER"
+defaultValue = "undefined"
+description = "The user of the first database that gets created. Will only get applied on first start."
+
+[[possibleVariables]]
+name = "MONGO_INITDB_PWD"
+defaultValue = "undefined"
+description = "The password of the first database user that gets created. Will only get applied on first start."
+
+[[possiblePorts]]
+name = "MongoDB Wire Protocol"
+description = "The MongoDB Wire protocol is used to communicate with clients."
+port = 27_017

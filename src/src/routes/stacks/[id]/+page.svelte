@@ -6,25 +6,24 @@
 	import H3 from 'src/components/typo/H3.svelte';
 	import ImageHeader from 'src/components/typo/ImageHeader.svelte';
 	import P from 'src/components/typo/P.svelte';
-	import { getImagePage } from 'src/data/imagePages/ImagePageData';
-	import { stringifyDockerCompose } from 'src/data/stackPages/DockerComposeSerializer';
 	import ImagePreview from 'src/routes/images/ImagePreview.svelte';
 	import Empty from 'src/routes/images/[name]/[tag]/Empty.svelte';
-	import { getStackPage } from '../../../data/stackPages/StackData';
 	import SvelteSeo from 'svelte-seo';
 	import FileView from '../../../components/FileView.svelte';
 	import StackSetup from '../StackSetup.svelte';
 	import H2 from 'src/components/typo/H2.svelte';
-	import { StackPage } from 'src/data/stackPages/StackPageModel';
 	import ExposedPort from './ExposedPort.svelte';
+	import { getImage } from 'src/data/images/ImageData';
+	import { getStack } from 'src/data/stacks/StackData';
+	import { stringifyDockerCompose } from 'src/data/stacks/DockerComposeSerializer';
 
 	let stackId = $page.params.id;
 
-	let stack = getStackPage(stackId)!;
+	let stack = getStack(stackId)!;
 	if (!stack) throw error(404, 'Not found');
 
 	let images = stack.compose.services
-		.map((s) => getImagePage(s.image, s.tag)!)
+		.map((s) => getImage(s.image, s.tag)!)
 		.flatMap((f) => (f ? [f] : []));
 </script>
 

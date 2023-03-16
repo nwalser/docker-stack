@@ -48,6 +48,7 @@
 		"fuse.js": "^6.6.2",
 		"monaco-editor": "^0.34.1",
 		"tailwind-scrollbar": "^2.1.0",
+		"toml": "^3.0.0",
 		"yaml": "^2.2.1"
 	}
 }

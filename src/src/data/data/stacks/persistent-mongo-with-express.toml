@@ -1,0 +1,48 @@
+id = "persistent-mongo-with-express"
+name = "Persistent MongoDB + Express Stack"
+description = "Simple MongoDB instance with public facing port and a MongoDB Express Management interface."
+imageUrl = "https://www.nathaniel-walser.com/docker-compose-templates/mongo/header.svg"
+
+[[exposedPorts]]
+name = "MongoDB Express"
+description = ""
+port = 8_081
+webInterface = true
+
+[[exposedPorts]]
+name = "MongoDB Wire Protocol"
+description = "The MongoDB Wire protocol is used to communicate with clients."
+port = 27_017
+webInterface = false
+
+[compose]
+version = "3.1"
+
+[[compose.services]]
+id = "mongo"
+image = "mongo"
+tag = "6"
+
+[[compose.services.ports]]
+container = 27_017
+host = 27_017
+
+[[compose.services.volumeIds]]
+volumeId = "mongo-data"
+mountPath = "/data/db"
+
+[[compose.services]]
+id = "mongo-express"
+image = "mongo-express"
+tag = "latest"
+
+[[compose.services.ports]]
+container = 8_081
+host = 8_081
+
+[[compose.services.environmentVariables]]
+key = "ME_CONFIG_MONGODB_URL"
+value = "mongodb://mongo:27017/"
+
+[[compose.volumes]]
+id = "mongo-data"

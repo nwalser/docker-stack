@@ -11,8 +11,7 @@
 		SidebarGroup
 	} from 'flowbite-svelte';
 	import { getImages } from 'src/data/images/ImageData';
-	import { getStackPages } from 'src/data/stackPages/StackData';
-	import { getImagePages } from 'src/data/imagePages/ImagePageData';
+	import { getStacks } from 'src/data/stacks/StackData';
 
 	let search = '';
 
@@ -58,7 +57,7 @@
 						<svelte:fragment slot="subtext">
 							<span
 								class="inline-flex justify-center items-center px-2 ml-3 text-sm font-medium text-gray-800 bg-gray-200 rounded-full dark:bg-gray-700 dark:text-gray-300"
-								>{getImagePages().length}</span
+								>{getImages().length}</span
 							>
 						</svelte:fragment>
 					</SidebarItem>
@@ -81,7 +80,7 @@
 						<svelte:fragment slot="subtext">
 							<span
 								class="inline-flex justify-center items-center p-3 ml-3 w-3 h-3 text-sm font-medium text-blue-600 bg-blue-200 rounded-full dark:bg-blue-900 dark:text-blue-200"
-								>{getStackPages().length}</span
+								>{getStacks().length}</span
 							>
 						</svelte:fragment>
 					</SidebarItem>
