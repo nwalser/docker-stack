@@ -1,0 +1,58 @@
+id = "eventstore"
+namespace = "eventstore"
+image = "eventstore"
+tag = "latest"
+
+[page]
+readableName = "EventStoreDB"
+imageUrl = "/headers/eventstoredb.svg"
+officialPage = "https://developers.eventstore.com/"
+description = """EventStoreDB is a database that is designed to store data as 
+a series of events. It supports features like persistent subscriptions, 
+catch up subscriptions and projections, just to name a few. It can be 
+used to implement patterns like event sourcing."""
+similarImages = []
+stackSpotlight = "simple-eventstoredb"
+
+
+[[possibleVolumes]]
+name = "Data"
+description = "This volume contains all the eventstore data."
+containerPath = "/var/lib/eventstore"
+
+[[possibleVolumes]]
+name = "Logs"
+description = "This volume contains all the eventstore logs."
+containerPath = "/var/log/eventstore"
+
+
+[[possibleVariables]]
+name = "EVENTSTORE_INSECURE"
+defaultValue = "false"
+description = "Disables the https certificate validation if true."
+
+[[possibleVariables]]
+name = "EVENTSTORE_EXT_TCP_PORT"
+defaultValue = "1113"
+description = "Set's the container client api port."
+
+[[possibleVariables]]
+name = "EVENTSTORE_HTTP_PORT"
+defaultValue = "2113"
+description = "Set's the container http admin ui port."
+
+[[possibleVariables]]
+name = "EVENTSTORE_ENABLE_ATOM_PUB_OVER_HTTP"
+defaultValue = ""
+description = ""
+
+
+[[possiblePorts]]
+name = "EventStoreDB API"
+description = "Eventstore api for clients."
+port = 1113
+
+[[possiblePorts]]
+name = "EventStoreDB Admin UI"
+description = "A web interface for managing the eventstore deployment."
+port = 2113

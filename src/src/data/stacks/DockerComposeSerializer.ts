@@ -109,8 +109,8 @@ function serializeService(service: Service): Document {
 
     let image = "";
 
-    if(service.mirror !== undefined) image += service.mirror + "/"
-    if(service.namespace !== undefined) image += service.namespace + "/"
+    if(service.mirror !== undefined) image += service.mirror + "/";
+    if(service.namespace !== undefined) image += service.namespace + "/";
 
     image += service.image + ":" + service.tag;
 
