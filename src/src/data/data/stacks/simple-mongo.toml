@@ -1,7 +1,7 @@
 id = "simple-mongo"
 name = "Persistent MongoDB Docker Stack"
 description = "Simple MongoDB instance with public facing port and persistent storage."
-imageUrl = "https://www.nathaniel-walser.com/docker-compose-templates/mongo/header.svg"
+imageUrl = "/headers/mongodb.svg"
 
 [[exposedPorts]]
 name = "MongoDB Wire Protocol"

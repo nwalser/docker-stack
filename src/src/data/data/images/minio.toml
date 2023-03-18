@@ -6,7 +6,7 @@ tag = "latest"
 
 [page]
 readableName = "MinIO"
-imageUrl = "https://www.nathaniel-walser.com/docker-compose-templates/minio/header.svg"
+imageUrl = "/headers/minio.svg"
 officialPage = "https://min.io/docs/minio/container/index.html"
 description = """Minio is an S3 compatible object store. It is designed to store blob 
 data. It has features like data retention policies, storage tiering, encryption and 

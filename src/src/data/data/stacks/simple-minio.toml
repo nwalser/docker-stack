@@ -1,7 +1,7 @@
 id = "simple-minio"
 name = "Persistent MinIO Docker Stack"
 description = "Simple MinIO instance with public facing port and persistent storage."
-imageUrl = "https://www.nathaniel-walser.com/docker-compose-templates/minio/header.svg"
+imageUrl = "/headers/minio.svg"
 
 [[exposedPorts]]
 name = "MinIO API"
