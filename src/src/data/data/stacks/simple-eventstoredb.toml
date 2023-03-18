@@ -1,0 +1,56 @@
+id = "simple-eventstoredb"
+name = "Persistent EventStoreDB Docker Stack"
+description = "Simple EventStoreDB instance with public facing port and persistent storage."
+imageUrl = "/headers/eventstoredb.svg"
+
+[[exposedPorts]]
+name = "EventStoreDB API"
+description = "Eventstore api for clients."
+port = 1113
+webInterface = false
+
+[[exposedPorts]]
+name = "EventStoreDB Admin UI"
+description = "A web interface for managing the eventstore deployment."
+port = 2113
+webInterface = true
+
+[compose]
+version = "3.1"
+comment = ""
+
+[[compose.services]]
+id = "eventstore"
+namespace = "eventstore"
+image = "eventstore"
+tag = "latest"
+
+[[compose.services.ports]]
+container = 1113
+host = 1113
+
+[[compose.services.ports]]
+container = 2113
+host = 2113
+
+[[compose.services.environmentVariables]]
+key = "EVENTSTORE_INSECURE"
+value = "true"
+
+[[compose.services.environmentVariables]]
+key = "EVENTSTORE_ENABLE_ATOM_PUB_OVER_HTTP"
+value = "true"
+
+[[compose.services.volumeIds]]
+volumeId = "eventstore-data"
+mountPath = "/var/lib/eventstore"
+
+[[compose.services.volumeIds]]
+volumeId = "eventstore-logs"
+mountPath = "/var/log/eventstore"
+
+[[compose.volumes]]
+id = "eventstore-data"
+
+[[compose.volumes]]
+id = "eventstore-logs"

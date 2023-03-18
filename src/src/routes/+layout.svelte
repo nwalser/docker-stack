@@ -1,6 +1,6 @@
 <script lang="ts">
 	import '../app.css';
-	import { Navbar, NavBrand, NavLi, NavUl, NavHamburger, Button, Input } from 'flowbite-svelte';
+	import { Input } from 'flowbite-svelte';
 	import { goto } from '$app/navigation';
 	import { SearchStore } from 'src/data/search/Search';
 	import {

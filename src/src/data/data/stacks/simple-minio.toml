@@ -1,0 +1,50 @@
+id = "simple-minio"
+name = "Persistent MinIO Docker Stack"
+description = "Simple MinIO instance with public facing port and persistent storage."
+imageUrl = "/headers/minio.svg"
+
+[[exposedPorts]]
+name = "MinIO API"
+description = "Minio api to connect to from clients."
+port = 9000
+webInterface = false
+
+[[exposedPorts]]
+name = "MinIO Web Console"
+description = "A web interface for managing the minio deployment."
+port = 9090
+webInterface = true
+
+[compose]
+version = "3.1"
+
+[[compose.services]]
+id = "minio"
+mirror="quay.io"
+namespace="minio"
+image = "minio"
+tag = "latest"
+command = 'server /data --console-address ":9090"'
+
+[[compose.services.ports]]
+container = 9000
+host = 9000
+
+[[compose.services.ports]]
+container = 9090
+host = 9090
+
+[[compose.services.environmentVariables]]
+key = "MINIO_ROOT_USER"
+value = "minioadmin"
+
+[[compose.services.environmentVariables]]
+key = "MINIO_ROOT_PASSWORD"
+value = "minioadmin"
+
+[[compose.services.volumeIds]]
+volumeId = "minio-data"
+mountPath = "/data"
+
+[[compose.volumes]]
+id = "minio-data"

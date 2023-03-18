@@ -1,0 +1,40 @@
+id = "minio"
+mirror = "quay.io"
+namespace = "minio"
+image = "minio"
+tag = "latest"
+
+[page]
+readableName = "MinIO"
+imageUrl = "/headers/minio.svg"
+officialPage = "https://min.io/docs/minio/container/index.html"
+description = """Minio is an S3 compatible object store. It is designed to store blob 
+data. It has features like data retention policies, storage tiering, encryption and 
+compression, just to name a few."""
+similarImages = []
+stackSpotlight = "simple-minio"
+
+[[possibleVolumes]]
+name = "Data"
+description = "This volume contains all the minio data."
+containerPath = "/data"
+
+[[possibleVariables]]
+name = "MINIO_ROOT_USER"
+defaultValue = "minioadmin"
+description = "The username of the root user."
+
+[[possibleVariables]]
+name = "MINIO_ROOT_PASSWORD"
+defaultValue = "minioadmin"
+description = "The password of the root user."
+
+[[possiblePorts]]
+name = "MinIO API"
+description = "Minio api to connect to from clients."
+port = 9000
+
+[[possiblePorts]]
+name = "MinIO Web Console"
+description = "A web interface for managing the minio deployment."
+port = 9090
