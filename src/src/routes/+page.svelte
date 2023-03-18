@@ -32,7 +32,7 @@
 
 <div class="w-full h-[1px] rounded-sm bg-slate-500 my-10" />
 
-<H2>Premade Stacks</H2>
+<H2>Stacks</H2>
 <Grid cols={3}>
 	{#each getStacks().slice(0, 5) as stackPage}
 		<StackPreview stack={stackPage} />
@@ -44,7 +44,7 @@
 	{/if}
 </Grid>
 
-<H2>Premade Images</H2>
+<H2>Images</H2>
 <Grid cols={3}>
 	{#each getImages().slice(0, 5) as page}
 		<ImagePreview image={page} />
