@@ -17,11 +17,11 @@ export function getImages(): Image[] {
 }
 
 export function getImage(name: string, tag: string): Image {
-    return getImages().find(i => i.name == name && i.tag == tag)!;
+    return getImages().find(i => i.id == name && i.tag == tag)!;
 }
 
 export function getAllTags(name: string): string[] {
-    return getImages().filter(i => i.name == name).map(i => i.tag);
+    return getImages().filter(i => i.id == name).map(i => i.tag);
 }
 
 export function searchImages(search: string): Image[] {
@@ -29,7 +29,7 @@ export function searchImages(search: string): Image[] {
 
     const options = {
         includeScore: true,
-        keys: ['name', 'tag', 'page.description']
+        keys: ['id', 'image', 'tag', 'page.description']
     }
 
     const fuse = new Fuse(getImages(), options)

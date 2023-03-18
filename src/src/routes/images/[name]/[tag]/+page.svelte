@@ -48,7 +48,7 @@
 
 <div class="grid grid-cols-3 gap-8 pt-4">
 	<div class="col-span-2 -mt-6">
-		<H1>{image.page.readableName} {image.page.tag} Docker Image Specifications</H1>
+		<H1>{image.page.readableName} {image.tag} Docker Image Specifications</H1>
 		<P>{image.page?.description}</P>
 
 		<LargeStackPreview stackPage={stackSpotlight} />

@@ -1,22 +1,26 @@
-name = "mongo"
+id="mongo"
+image = "mongo"
 tag = "6"
 
 [page]
 readableName = "MongoDB"
 imageUrl = "https://www.nathaniel-walser.com/docker-compose-templates/mongo/header.svg"
 officialPage = "https://hub.docker.com/_/mongo"
-description = "MongoDB is a free and open-source cross-platform document-oriented database program. Classified as a NoSQL database program, MongoDB uses JSON-like documents with schemata. MongoDB is developed by MongoDB Inc., and is published under a combination of the Server Side Public License and the Apache License."
+description = """MongoDB is a free and open-source cross-platform document-oriented 
+database program. Classified as a NoSQL database program, MongoDB uses JSON-like 
+documents with schemata. MongoDB is developed by MongoDB Inc., and is published 
+under a combination of the Server Side Public License and the Apache License."""
 similarImages = [ ]
 stackSpotlight = "simple-mongo"
 
 [[possibleVolumes]]
 name = "Data"
-description = "This Volume contains all the database data."
+description = "This volume contains all the database data."
 containerPath = "/data/db"
 
 [[possibleVolumes]]
 name = "Config"
-description = "This Volume will be read for mongodb configuration files."
+description = "This volume will be read for mongodb configuration files."
 containerPath = "/data/configdb"
 
 [[possibleVariables]]

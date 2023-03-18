@@ -1,5 +1,9 @@
 export class Image {
-    name: string = "";
+    id: string = "";
+
+    mirror: string | undefined;
+    namespace: string | undefined;
+    image: string = "";
     tag: string = "";
 
     page: ImagePage;
@@ -7,10 +11,13 @@ export class Image {
     possibleVolumes: PossibleVolume[] = [];
     possibleVariables: PossibleVariable[] = [];
     possiblePorts: PossiblePort[] = [];
+
+    constructor(page: ImagePage){
+        this.page = page;
+    }
 }
 
 export class ImagePage {
-    name: string;
     readableName: string;
 
     imageUrl: string;
@@ -20,11 +27,9 @@ export class ImagePage {
 
     stackSpotlight: string;
 
-    constructor(name: string, readableName: string, imageUrl: string, tag: string, description: string, stackSpotlight: string){
-        this.name = name;
+    constructor(readableName: string, imageUrl: string, description: string, stackSpotlight: string){
         this.readableName = readableName;
         this.imageUrl = imageUrl;
-        this.tag = tag;
         this.description = description;
         this.stackSpotlight = stackSpotlight;
     }

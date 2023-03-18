@@ -12,8 +12,11 @@ export class DockerCompose {
 
 export class Service {
     id: string;
+    mirror: string | undefined;
+    namespace: string | undefined;
     image: string;
     tag: string;
+    command: string = "";
 
     ports: Port[] = [];    
     environmentVariables: KeyValue[] = [];

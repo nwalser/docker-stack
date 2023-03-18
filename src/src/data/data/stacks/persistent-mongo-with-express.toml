@@ -1,5 +1,5 @@
 id = "persistent-mongo-with-express"
-name = "Persistent MongoDB + Express Stack"
+name = "Persistent MongoDB + Express Docker Stack"
 description = "Simple MongoDB instance with public facing port and a MongoDB Express Management interface."
 imageUrl = "https://www.nathaniel-walser.com/docker-compose-templates/mongo/header.svg"
 

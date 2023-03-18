@@ -106,9 +106,21 @@ function serializeServices(services: Service[]) {
 }
 
 function serializeService(service: Service): Document {
+
+    let image = "";
+
+    if(service.mirror !== undefined) image += service.mirror + "/"
+    if(service.namespace !== undefined) image += service.namespace + "/"
+
+    image += service.image + ":" + service.tag;
+
     let document = new Document({
-        image: service.image + ":" + service.tag,
+        image: image,
     });
+
+    if (service.command?.length > 0) {
+        document.addIn(["command"], service.command);
+    }
 
     if (service.ports?.length > 0) {
         document.addIn(["ports"], serializeServicePorts(service.ports));
